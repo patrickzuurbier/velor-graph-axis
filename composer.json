@@ -1,0 +1,30 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "patrickzuurbier/velor-graph-axis",
+    "description": "Axis graph types for Velor CMS.",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.4.1",
+        "velor/cms": "^1.22"
+    },
+    "autoload": {
+        "psr-4": {
+            "Velor\\GraphAxis\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Velor\\GraphAxis\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Velor\\GraphAxis\\Providers\\GraphAxisServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
