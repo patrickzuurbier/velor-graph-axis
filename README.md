@@ -2,6 +2,7 @@
 
 Axis graph types for Velor CMS. The package initially provides the PHP contract
 and renderer-neutral result model for line graphs with one or multiple series.
+Its package-owned frontend adapter renders those results through Apache ECharts.
 
 ## Requirements
 
@@ -14,10 +15,13 @@ Require the package in a compatible Velor CMS application:
 
 ```bash
 composer require patrickzuurbier/velor-graph-axis
+npm run build
 ```
 
 Laravel package discovery registers `GraphAxisServiceProvider`. The provider
 adds the version 1 `axis.line` graph type to Velor's graph-type registry.
+The package includes its compiled renderer assets; consuming applications do
+not install ECharts or package-specific npm dependencies themselves.
 
 ## Creating A Line Graph
 
@@ -92,18 +96,41 @@ is distinct from numeric zero.
 The result contains no ECharts configuration. Velor's frontend adapter maps
 this stable package schema to the installed renderer.
 
-## Current Scope
+## Renderer Loading
 
-This initial package slice provides:
+The package registers a small `axis.line` entrypoint with Velor's frontend
+renderer registry. The concrete renderer loads asynchronously only when a line
+graph is present. Its package build imports only ECharts core, `LineChart`,
+grid, legend, tooltip, and `CanvasRenderer`; unrelated chart types are excluded.
+
+The line renderer supports multiple series and recognizes an optional
+client-side `scale` control with `linear` and `logarithmic` values. Server-side
+controls continue to refresh only the affected graph card.
+
+The package provides:
 
 - `LineGraphInterface` and `AbstractLineGraph`;
 - `LineGraphResultInterface`;
 - validated multi-series line result DTOs;
-- automatic registration of `axis.line`.
+- automatic registration of `axis.line`;
+- a lazy multi-series line renderer;
+- linear and logarithmic presentation scales.
 
-Frontend rendering, graph controls, dashboard placement, and authenticated data
-endpoints are added through the wider Velor graph integration rather than by
-custom graph classes.
+Graph placement and authenticated data endpoints remain core concerns. Custom
+graph classes only declare controls and return the package result contract.
+
+## Package Development
+
+Install and compile the package-owned frontend dependencies with:
+
+```bash
+npm ci
+npm run typecheck
+npm run build
+```
+
+The generated `dist` assets are part of the Composer distribution. Rebuild them
+whenever renderer source or frontend dependencies change.
 
 ## Testing
 
