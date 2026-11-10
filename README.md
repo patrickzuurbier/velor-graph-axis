@@ -119,12 +119,13 @@ The package provides:
 Graph placement and authenticated data endpoints remain core concerns. Custom
 graph classes only declare controls and return the package result contract.
 
-## Local Showcase
+## Example Graph
 
 `Velor\GraphAxis\Examples\RainfallLineGraph` provides static multi-series data
-for local renderer validation. The package does not register or place this
-graph automatically. Applications may opt into it explicitly in a local debug
-environment.
+for renderer validation and future example publishing. The package does not
+register or place this class. A published copy below `app/Graphs` behaves like
+every other application graph and remains available until the developer removes
+the class and its dashboard or resource placements.
 
 ## Package Development
 
