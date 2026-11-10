@@ -119,6 +119,13 @@ The package provides:
 Graph placement and authenticated data endpoints remain core concerns. Custom
 graph classes only declare controls and return the package result contract.
 
+## Local Showcase
+
+`Velor\GraphAxis\Examples\RainfallLineGraph` provides static multi-series data
+for local renderer validation. The package does not register or place this
+graph automatically. Applications may opt into it explicitly in a local debug
+environment.
+
 ## Package Development
 
 Install and compile the package-owned frontend dependencies with:
@@ -131,6 +138,10 @@ npm run build
 
 The generated `dist` assets are part of the Composer distribution. Rebuild them
 whenever renderer source or frontend dependencies change.
+
+The build also synchronizes the applicable third-party license and notice texts
+into `licenses/`. See `THIRD_PARTY_NOTICES.md` for the included dependencies,
+versions, and license identifiers.
 
 ## Testing
 

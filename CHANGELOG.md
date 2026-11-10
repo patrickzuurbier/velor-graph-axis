@@ -12,3 +12,5 @@ This project follows semantic versioning: `MAJOR.MINOR.PATCH`.
   graph, and validated renderer-neutral result DTOs for one or multiple series.
 - Added a lazy, package-owned Apache ECharts renderer for multi-series line
   graphs with linear and logarithmic presentation scales.
+- Added an optional translated rainfall showcase graph for local renderer
+  validation.

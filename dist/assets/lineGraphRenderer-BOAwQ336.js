@@ -1,6 +1,7 @@
 var z0 = Object.defineProperty;
 var H0 = (t, e, r) => e in t ? z0(t, e, { enumerable: !0, configurable: !0, writable: !0, value: r }) : t[e] = r;
 var Ec = (t, e, r) => H0(t, typeof e != "symbol" ? e + "" : e, r);
+/*! Third-party licenses: see THIRD_PARTY_NOTICES.md and licenses/ in the Composer package. */
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
 

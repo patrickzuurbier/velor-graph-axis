@@ -10,6 +10,7 @@ export default defineConfig({
         },
         rollupOptions: {
             output: {
+                banner: '/*! Third-party licenses: see THIRD_PARTY_NOTICES.md and licenses/ in the Composer package. */',
                 entryFileNames: 'cms.js',
                 chunkFileNames: 'assets/[name]-[hash].js',
             },

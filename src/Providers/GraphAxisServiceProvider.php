@@ -14,6 +14,8 @@ class GraphAxisServiceProvider extends ServiceProvider
 {
     public function boot(GraphTypeRegistryInterface $graphTypes): void
     {
+        $this->loadTranslationsFrom(__DIR__ . '/../../lang', 'velor-graph-axis');
+
         $graphTypes->register(new GraphTypeData(
             key: LineGraphInterface::TYPE,
             version: 1,
