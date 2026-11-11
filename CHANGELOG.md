@@ -6,6 +6,8 @@ This project follows semantic versioning: `MAJOR.MINOR.PATCH`.
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-11-11
+
 ### Added
 
 - Added the `axis.line` graph type, line graph contract, reusable abstract line
@@ -26,3 +28,6 @@ This project follows semantic versioning: `MAJOR.MINOR.PATCH`.
 - Added the `axis.mixed` graph type for combined line and bar series with
   optional bar stacking, primary and secondary value axes, package-owned
   generation, and a translated publishable Monthly Performance example.
+
+[Unreleased]: https://github.com/patrickzuurbier/velor-graph-axis/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/patrickzuurbier/velor-graph-axis/releases/tag/1.0.0
