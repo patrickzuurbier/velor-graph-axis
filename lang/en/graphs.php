@@ -12,6 +12,12 @@ return [
         'week'  => 'Week',
         'year'  => 'Year',
     ],
+    'quarterly-sales' => [
+        'description' => 'Quarterly online and retail sales shown as stacked bars.',
+        'online'      => 'Online',
+        'retail'      => 'Retail',
+        'title'       => 'Quarterly sales',
+    ],
     'rainfall' => [
         'coastal'     => 'Coastal station',
         'description' => 'Local renderer showcase with server and browser controls.',

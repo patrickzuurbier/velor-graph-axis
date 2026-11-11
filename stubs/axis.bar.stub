@@ -1,0 +1,34 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use App\Services\Graphs\Contracts\GraphContextInterface;
+use Velor\GraphAxis\AbstractBarGraph;
+use Velor\GraphAxis\Contracts\BarGraphResultInterface;
+use Velor\GraphAxis\Data\BarGraphResultData;
+use Velor\GraphAxis\Data\BarSeriesData;
+
+class {{ class }} extends AbstractBarGraph
+{
+    public function key(): string
+    {
+        return '{{ graphKey }}';
+    }
+
+    public function title(): string
+    {
+        return '{{ graphTitle }}';
+    }
+
+    public function result(GraphContextInterface $context): BarGraphResultInterface
+    {
+        return new BarGraphResultData(
+            categories: ['Example'],
+            series: [
+                new BarSeriesData('value', 'Value', [0]),
+            ],
+        );
+    }
+}

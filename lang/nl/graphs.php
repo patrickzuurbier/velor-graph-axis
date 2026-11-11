@@ -12,6 +12,12 @@ return [
         'week'  => 'Week',
         'year'  => 'Jaar',
     ],
+    'quarterly-sales' => [
+        'description' => 'Online- en winkelverkoop per kwartaal als gestapelde balken.',
+        'online'      => 'Online',
+        'retail'      => 'Winkel',
+        'title'       => 'Kwartaalverkoop',
+    ],
     'rainfall' => [
         'coastal'     => 'Kuststation',
         'description' => 'Lokale renderer-showcase met server- en browserbediening.',

@@ -7,6 +7,7 @@ namespace Velor\GraphAxis\Tests\Integration;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Testing\PendingCommand;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\AbstractIntegrationTestCase;
 
 class GraphAxisCommandTest extends AbstractIntegrationTestCase
@@ -59,27 +60,61 @@ class GraphAxisCommandTest extends AbstractIntegrationTestCase
         $this->assertNotEmpty(token_get_all($content, TOKEN_PARSE));
     }
 
-    public function test_it_publishes_and_removes_the_rainfall_example(): void
+    public function test_it_generates_an_application_bar_graph(): void
+    {
+        $command = $this->artisan('velor:make:graph', [
+            'name'   => 'QuarterlySales',
+            '--type' => 'axis.bar',
+        ]);
+
+        $this->assertInstanceOf(PendingCommand::class, $command);
+        $command->assertExitCode(Command::SUCCESS)->run();
+
+        $path = $this->temporaryBasePath . '/app/Graphs/QuarterlySalesGraph.php';
+
+        $this->assertTrue($this->files->exists($path));
+
+        $content = $this->files->get($path);
+
+        $this->assertStringContainsString('class QuarterlySalesGraph extends AbstractBarGraph', $content);
+        $this->assertStringContainsString("return 'quarterly-sales';", $content);
+        $this->assertStringContainsString("return 'Quarterly Sales';", $content);
+        $this->assertNotEmpty(token_get_all($content, TOKEN_PARSE));
+    }
+
+    #[DataProvider('exampleProvider')]
+    public function test_it_publishes_and_removes_an_axis_example(string $example, string $filename): void
     {
         $publish = $this->artisan('velor:graph:example:publish', [
-            'example' => 'axis.rainfall-line',
+            'example' => $example,
         ]);
 
         $this->assertInstanceOf(PendingCommand::class, $publish);
         $publish->assertExitCode(Command::SUCCESS)->run();
 
-        $path = $this->temporaryBasePath . '/app/Graphs/RainfallLineGraph.php';
+        $path = $this->temporaryBasePath . '/app/Graphs/' . $filename;
 
         $this->assertTrue($this->files->exists($path));
         $this->assertNotEmpty(token_get_all($this->files->get($path), TOKEN_PARSE));
 
         $remove = $this->artisan('velor:graph:example:remove', [
-            'example' => 'axis.rainfall-line',
+            'example' => $example,
         ]);
 
         $this->assertInstanceOf(PendingCommand::class, $remove);
         $remove->assertExitCode(Command::SUCCESS)->run();
 
         $this->assertFalse($this->files->exists($path));
+    }
+
+    /**
+     * @return array<string, array{string, string}>
+     */
+    public static function exampleProvider(): array
+    {
+        return [
+            'line' => ['axis.rainfall-line', 'RainfallLineGraph.php'],
+            'bar'  => ['axis.quarterly-sales-bar', 'QuarterlySalesBarGraph.php'],
+        ];
     }
 }

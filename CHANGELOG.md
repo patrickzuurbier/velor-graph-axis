@@ -14,3 +14,6 @@ This project follows semantic versioning: `MAJOR.MINOR.PATCH`.
   graphs with linear and logarithmic presentation scales.
 - Added package-owned `axis.line` generation and a translated Rainfall example
   with safe publication and removal through the Velor CMS graph commands.
+- Added the `axis.bar` graph type with vertical, horizontal, grouped, stacked,
+  and percentage presentations, a lazy renderer, package-owned generation, and
+  a translated publishable Quarterly Sales example.

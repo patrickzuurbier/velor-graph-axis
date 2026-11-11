@@ -1,8 +1,8 @@
 # Velor Graph Axis
 
-Axis graph types for Velor CMS. The package initially provides the PHP contract
-and renderer-neutral result model for line graphs with one or multiple series.
-Its package-owned frontend adapter renders those results through Apache ECharts.
+Axis graph types for Velor CMS. The package provides renderer-neutral PHP
+contracts and lazy Apache ECharts adapters for line and bar graphs with one or
+multiple series.
 
 ## Requirements
 
@@ -19,7 +19,8 @@ npm run build
 ```
 
 Laravel package discovery registers `GraphAxisServiceProvider`. The provider
-adds the version 1 `axis.line` graph type to Velor's graph-type registry.
+adds the version 1 `axis.line` and `axis.bar` graph types to Velor's graph-type
+registry.
 The package includes its compiled renderer assets; consuming applications do
 not install ECharts or package-specific npm dependencies themselves.
 
@@ -73,10 +74,57 @@ A graph may use constructor-injected repositories or services, Eloquent,
 Laravel's query builder, an external API, or another suitable data source. The
 package constrains the returned result, not how values are calculated.
 
+## Creating A Bar Graph
+
+Generate a bar graph:
+
+```bash
+php artisan velor:make:graph QuarterlySalesGraph --type=axis.bar
+```
+
+Bar graphs extend `AbstractBarGraph`. Their result defines categories, series,
+orientation, and value mode:
+
+```php
+namespace App\Graphs;
+
+use App\Services\Graphs\Contracts\GraphContextInterface;
+use Velor\GraphAxis\AbstractBarGraph;
+use Velor\GraphAxis\Contracts\BarGraphResultInterface;
+use Velor\GraphAxis\Data\BarGraphResultData;
+use Velor\GraphAxis\Data\BarSeriesData;
+use Velor\GraphAxis\Enums\BarOrientationEnum;
+
+class QuarterlySalesGraph extends AbstractBarGraph
+{
+    public function key(): string
+    {
+        return 'quarterly-sales';
+    }
+
+    public function title(): string
+    {
+        return 'Quarterly sales';
+    }
+
+    public function result(GraphContextInterface $context): BarGraphResultInterface
+    {
+        return new BarGraphResultData(
+            categories: ['Q1', 'Q2', 'Q3', 'Q4'],
+            series: [
+                new BarSeriesData('online', 'Online', [82, 91, 104, 118]),
+                new BarSeriesData('retail', 'Retail', [64, 72, 69, 81]),
+            ],
+            orientation: BarOrientationEnum::VERTICAL,
+        );
+    }
+}
+```
+
 ## Optional Description And Controls
 
-`AbstractLineGraph` provides no description and no controls by default. Override
-`description()` to show supporting text below the graph title:
+Axis graph base classes provide no description and no controls by default.
+Override `description()` to show supporting text below the graph title:
 
 ```php
 public function description(): ?string
@@ -125,7 +173,7 @@ current result and change only its presentation. The line renderer supports
 `scale` as a client control with `linear` and `logarithmic` values. See the
 publishable Rainfall example for a complete implementation.
 
-## Result Contract
+## Line Result Contract
 
 `LineGraphResultData` contains ordered category labels and ordered line series.
 Every series contains exactly one numeric or `null` value for every category:
@@ -155,12 +203,30 @@ is distinct from numeric zero.
 The result contains no ECharts configuration. Velor's frontend adapter maps
 this stable package schema to the installed renderer.
 
+## Bar Result Contract
+
+`BarGraphResultData` uses the same ordered category and series structure. Each
+`BarSeriesData` additionally accepts an optional lowercase kebab-case `stack`
+key. Series without a stack are grouped; series with the same stack key are
+stacked.
+
+`BarOrientationEnum::VERTICAL` places categories on the horizontal axis.
+`BarOrientationEnum::HORIZONTAL` places categories on the vertical axis.
+
+The default `BarValueModeEnum::VALUE` displays numeric values. Use
+`BarValueModeEnum::PERCENTAGE` for percentage bars. Percentage values are
+explicit graph data between `0` and `100`; Velor does not silently normalize
+raw measurements. Combine percentage mode with a shared stack key for a
+percentage-stacked presentation. A percentage stack cannot exceed `100` within
+one category.
+
 ## Renderer Loading
 
-The package registers a small `axis.line` entrypoint with Velor's frontend
-renderer registry. The concrete renderer loads asynchronously only when a line
-graph is present. Its package build imports only ECharts core, `LineChart`,
-grid, legend, tooltip, and `CanvasRenderer`; unrelated chart types are excluded.
+The package registers small `axis.line` and `axis.bar` entrypoints with Velor's
+frontend renderer registry. Each concrete renderer loads asynchronously only
+when its graph type is present. The package build imports ECharts core,
+`LineChart`, `BarChart`, grid, legend, tooltip, and `CanvasRenderer`; each chart
+module remains in its own lazy chunk.
 
 The line renderer supports multiple series and recognizes an optional
 client-side `scale` control with `linear` and `logarithmic` values. Server-side
@@ -171,14 +237,16 @@ The package provides:
 - `LineGraphInterface` and `AbstractLineGraph`;
 - `LineGraphResultInterface`;
 - validated multi-series line result DTOs;
-- automatic registration of `axis.line`;
-- a lazy multi-series line renderer;
+- `BarGraphInterface`, `AbstractBarGraph`, and validated bar result DTOs;
+- vertical, horizontal, grouped, stacked, and percentage bar presentations;
+- automatic registration of `axis.line` and `axis.bar`;
+- lazy multi-series line and bar renderers;
 - linear and logarithmic presentation scales.
 
 Graph placement and authenticated data endpoints remain core concerns. Custom
 graph classes only declare controls and return the package result contract.
 
-## Example Graph
+## Example Graphs
 
 Publish the translated, multi-series Rainfall example into `app/Graphs` with:
 
@@ -195,6 +263,13 @@ php artisan velor:graph:example:remove axis.rainfall-line
 ```
 
 The removal command preserves a modified copy.
+
+Publish or remove the stacked Quarterly Sales bar example with:
+
+```bash
+php artisan velor:graph:example:publish axis.quarterly-sales-bar
+php artisan velor:graph:example:remove axis.quarterly-sales-bar
+```
 
 ## Package Development
 
