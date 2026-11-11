@@ -70,7 +70,7 @@ class GraphAxisCommandTest extends AbstractIntegrationTestCase
     #[DataProvider('exampleProvider')]
     public function test_it_publishes_and_removes_an_axis_example(string $example, string $filename): void
     {
-        $publish = $this->artisan('velor:graph:example:publish', [
+        $publish = $this->artisan('velor-graph-axis:publish', [
             'example' => $example,
         ]);
 
@@ -82,7 +82,7 @@ class GraphAxisCommandTest extends AbstractIntegrationTestCase
         $this->assertTrue($this->files->exists($path));
         $this->assertNotEmpty(token_get_all($this->files->get($path), TOKEN_PARSE));
 
-        $remove = $this->artisan('velor:graph:example:remove', [
+        $remove = $this->artisan('velor-graph-axis:remove', [
             'example' => $example,
         ]);
 
@@ -92,20 +92,83 @@ class GraphAxisCommandTest extends AbstractIntegrationTestCase
         $this->assertFalse($this->files->exists($path));
     }
 
+    public function test_it_publishes_every_axis_example(): void
+    {
+        $command = $this->artisan('velor-graph-axis:publish', [
+            '--all' => true,
+        ]);
+
+        $this->assertInstanceOf(PendingCommand::class, $command);
+        $command->assertExitCode(Command::SUCCESS)->run();
+
+        foreach (self::exampleProvider() as [$example, $filename]) {
+            $this->assertTrue($this->files->exists($this->temporaryBasePath . '/app/Graphs/' . $filename));
+        }
+    }
+
+    public function test_it_does_not_overwrite_an_existing_axis_example(): void
+    {
+        $path = $this->temporaryBasePath . '/app/Graphs/RainfallLineGraph.php';
+
+        $this->files->ensureDirectoryExists(dirname($path));
+        $this->files->put($path, 'existing graph');
+
+        $command = $this->artisan('velor-graph-axis:publish', [
+            'example' => 'rainfall-line-example',
+        ]);
+
+        $this->assertInstanceOf(PendingCommand::class, $command);
+        $command->assertExitCode(Command::FAILURE)->run();
+
+        $this->assertSame('existing graph', $this->files->get($path));
+    }
+
+    public function test_it_preserves_a_modified_axis_example(): void
+    {
+        $path = $this->temporaryBasePath . '/app/Graphs/RainfallLineGraph.php';
+        $publish = $this->artisan('velor-graph-axis:publish', [
+            'example' => 'rainfall-line-example',
+        ]);
+
+        $this->assertInstanceOf(PendingCommand::class, $publish);
+        $publish->assertExitCode(Command::SUCCESS)->run();
+
+        $this->files->put($path, 'modified graph');
+
+        $remove = $this->artisan('velor-graph-axis:remove', [
+            'example' => 'rainfall-line-example',
+        ]);
+
+        $this->assertInstanceOf(PendingCommand::class, $remove);
+        $remove->assertExitCode(Command::FAILURE)->run();
+
+        $this->assertSame('modified graph', $this->files->get($path));
+    }
+
+    public function test_it_rejects_an_unknown_axis_example(): void
+    {
+        $command = $this->artisan('velor-graph-axis:publish', [
+            'example' => 'unknown',
+        ]);
+
+        $this->assertInstanceOf(PendingCommand::class, $command);
+        $command->assertExitCode(Command::FAILURE)->run();
+    }
+
     /**
      * @return array<string, array{string, string}>
      */
     public static function exampleProvider(): array
     {
         return [
-            'line'          => ['axis.rainfall-line', 'RainfallLineGraph.php'],
-            'mixed'         => ['axis.monthly-performance-mixed', 'MonthlyPerformanceMixedGraph.php'],
-            'bar'           => ['axis.quarterly-sales-bar', 'QuarterlySalesBarGraph.php'],
+            'line'          => ['rainfall-line-example', 'RainfallLineGraph.php'],
+            'mixed'         => ['monthly-performance-mixed-example', 'MonthlyPerformanceMixedGraph.php'],
+            'bar'           => ['quarterly-sales-bar-example', 'QuarterlySalesBarGraph.php'],
             'pictorial bar' => [
-                'axis.weekly-visitors-pictorial-bar',
+                'weekly-visitors-pictorial-bar-example',
                 'WeeklyVisitorsPictorialBarGraph.php',
             ],
-            'scatter' => ['axis.marketing-reach-scatter', 'MarketingReachScatterGraph.php'],
+            'scatter' => ['marketing-reach-scatter-example', 'MarketingReachScatterGraph.php'],
         ];
     }
 

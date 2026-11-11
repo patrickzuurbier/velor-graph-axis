@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Velor\GraphAxis\Tests\Integration;
 
-use App\Services\Graphs\Contracts\GraphExampleRegistryInterface;
 use App\Services\Graphs\Contracts\GraphTypeRegistryInterface;
 use Illuminate\Contracts\Translation\Translator;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -45,18 +44,6 @@ class GraphAxisPackageTest extends AbstractIntegrationTestCase
         $this->assertNotNull($type->generatorStub);
         $this->assertFileExists($type->generatorStub);
         $this->assertStringEndsWith('/stubs/' . $stub, $type->generatorStub);
-    }
-
-    #[DataProvider('exampleProvider')]
-    public function test_package_registers_an_axis_example(string $key, string $source, string $target): void
-    {
-        $examples = $this->app->make(GraphExampleRegistryInterface::class);
-        $example = $examples->find($key);
-
-        $this->assertNotNull($example);
-        $this->assertFileExists($example->source);
-        $this->assertStringEndsWith('/examples/' . $source, $example->source);
-        $this->assertSame($target, $example->target);
     }
 
     public function test_package_loads_the_example_translations(): void
@@ -124,32 +111,6 @@ class GraphAxisPackageTest extends AbstractIntegrationTestCase
                 ScatterGraphInterface::class,
                 ScatterGraphResultInterface::class,
                 'axis.scatter.stub',
-            ],
-        ];
-    }
-
-    /**
-     * @return array<string, array{string, string, string}>
-     */
-    public static function exampleProvider(): array
-    {
-        return [
-            'bar'   => ['axis.quarterly-sales-bar', 'QuarterlySalesBarGraph.php', 'QuarterlySalesBarGraph.php'],
-            'line'  => ['axis.rainfall-line', 'RainfallLineGraph.php', 'RainfallLineGraph.php'],
-            'mixed' => [
-                'axis.monthly-performance-mixed',
-                'MonthlyPerformanceMixedGraph.php',
-                'MonthlyPerformanceMixedGraph.php',
-            ],
-            'pictorial bar' => [
-                'axis.weekly-visitors-pictorial-bar',
-                'WeeklyVisitorsPictorialBarGraph.php',
-                'WeeklyVisitorsPictorialBarGraph.php',
-            ],
-            'scatter' => [
-                'axis.marketing-reach-scatter',
-                'MarketingReachScatterGraph.php',
-                'MarketingReachScatterGraph.php',
             ],
         ];
     }

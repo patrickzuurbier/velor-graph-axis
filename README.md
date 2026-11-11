@@ -420,7 +420,7 @@ graph classes only declare controls and return the package result contract.
 Publish the translated, multi-series Rainfall example into `app/Graphs` with:
 
 ```bash
-php artisan velor:graph:example:publish axis.rainfall-line
+php artisan velor-graph-axis:publish rainfall-line-example
 ```
 
 The published class behaves like every other application graph and is not
@@ -428,7 +428,7 @@ placed automatically. After removing its dashboard or resource placements,
 remove an unchanged published copy with:
 
 ```bash
-php artisan velor:graph:example:remove axis.rainfall-line
+php artisan velor-graph-axis:remove rainfall-line-example
 ```
 
 The removal command preserves a modified copy.
@@ -436,30 +436,34 @@ The removal command preserves a modified copy.
 Publish or remove the stacked Quarterly Sales bar example with:
 
 ```bash
-php artisan velor:graph:example:publish axis.quarterly-sales-bar
-php artisan velor:graph:example:remove axis.quarterly-sales-bar
+php artisan velor-graph-axis:publish quarterly-sales-bar-example
+php artisan velor-graph-axis:remove quarterly-sales-bar-example
 ```
 
 Publish or remove the repeated-symbol Weekly Visitors example with:
 
 ```bash
-php artisan velor:graph:example:publish axis.weekly-visitors-pictorial-bar
-php artisan velor:graph:example:remove axis.weekly-visitors-pictorial-bar
+php artisan velor-graph-axis:publish weekly-visitors-pictorial-bar-example
+php artisan velor-graph-axis:remove weekly-visitors-pictorial-bar-example
 ```
 
 Publish or remove the multi-series Marketing Reach bubble example with:
 
 ```bash
-php artisan velor:graph:example:publish axis.marketing-reach-scatter
-php artisan velor:graph:example:remove axis.marketing-reach-scatter
+php artisan velor-graph-axis:publish marketing-reach-scatter-example
+php artisan velor-graph-axis:remove marketing-reach-scatter-example
 ```
 
 Publish or remove the stacked visitor bars and conversion line example with:
 
 ```bash
-php artisan velor:graph:example:publish axis.monthly-performance-mixed
-php artisan velor:graph:example:remove axis.monthly-performance-mixed
+php artisan velor-graph-axis:publish monthly-performance-mixed-example
+php artisan velor-graph-axis:remove monthly-performance-mixed-example
 ```
+
+Use `--all` instead of an example key to publish or remove every Axis example.
+Publishing never overwrites an existing application graph. Removal deletes only
+an unchanged copy of the package example.
 
 ## Package Development
 
