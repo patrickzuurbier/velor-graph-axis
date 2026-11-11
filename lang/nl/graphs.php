@@ -12,6 +12,14 @@ return [
         'week'  => 'Week',
         'year'  => 'Jaar',
     ],
+    'marketing-reach' => [
+        'budget'      => 'Budget (duizenden)',
+        'description' => 'Campagnebereik ten opzichte van budget; de bolgrootte toont conversies.',
+        'reach'       => 'Bereik (duizenden)',
+        'search'      => 'Zoeken',
+        'social'      => 'Sociaal',
+        'title'       => 'Marketingbereik',
+    ],
     'quarterly-sales' => [
         'description' => 'Online- en winkelverkoop per kwartaal als gestapelde balken.',
         'online'      => 'Online',

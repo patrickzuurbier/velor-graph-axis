@@ -12,6 +12,14 @@ return [
         'week'  => 'Week',
         'year'  => 'Year',
     ],
+    'marketing-reach' => [
+        'budget'      => 'Budget (thousands)',
+        'description' => 'Campaign reach compared with budget; bubble size represents conversions.',
+        'reach'       => 'Reach (thousands)',
+        'search'      => 'Search',
+        'social'      => 'Social',
+        'title'       => 'Marketing reach',
+    ],
     'quarterly-sales' => [
         'description' => 'Quarterly online and retail sales shown as stacked bars.',
         'online'      => 'Online',

@@ -1,8 +1,8 @@
 # Velor Graph Axis
 
 Axis graph types for Velor CMS. The package provides renderer-neutral PHP
-contracts and lazy Apache ECharts adapters for line, bar, and pictorial bar
-graphs with one or multiple series.
+contracts and lazy Apache ECharts adapters for line, bar, pictorial bar, and
+scatter graphs with one or multiple series.
 
 ## Requirements
 
@@ -19,8 +19,8 @@ npm run build
 ```
 
 Laravel package discovery registers `GraphAxisServiceProvider`. The provider
-adds the version 1 `axis.line`, `axis.bar`, and `axis.pictorial-bar` graph types
-to Velor's graph-type registry.
+adds the version 1 `axis.line`, `axis.bar`, `axis.pictorial-bar`, and
+`axis.scatter` graph types to Velor's graph-type registry.
 The package includes its compiled renderer assets; consuming applications do
 not install ECharts or package-specific npm dependencies themselves.
 
@@ -165,6 +165,48 @@ Available symbols are `ARROW`, `CIRCLE`, `DIAMOND`, `PIN`, `RECTANGLE`,
 `REPEATED` fills the value with clipped repeated shapes. Pictorial values must be
 non-negative.
 
+## Creating A Scatter Graph
+
+Generate a scatter graph:
+
+```bash
+php artisan velor:make:graph MarketingReachGraph --type=axis.scatter
+```
+
+Scatter graphs extend `AbstractScatterGraph`. Every point has numeric `x` and
+`y` coordinates. Add an optional non-negative size to produce bubbles and an
+optional label to identify an individual point:
+
+```php
+use App\Services\Graphs\Contracts\GraphContextInterface;
+use Velor\GraphAxis\Contracts\ScatterGraphResultInterface;
+use Velor\GraphAxis\Data\ScatterGraphResultData;
+use Velor\GraphAxis\Data\ScatterPointData;
+use Velor\GraphAxis\Data\ScatterSeriesData;
+
+public function result(GraphContextInterface $context): ScatterGraphResultInterface
+{
+    return new ScatterGraphResultData(
+        series: [
+            new ScatterSeriesData('search', 'Search', [
+                new ScatterPointData(12, 42, 180, 'Spring campaign'),
+                new ScatterPointData(19, 58, 260, 'Summer campaign'),
+            ]),
+            new ScatterSeriesData('social', 'Social', [
+                new ScatterPointData(9, 34),
+                new ScatterPointData(17, 49),
+            ]),
+        ],
+        xAxisLabel: 'Budget',
+        yAxisLabel: 'Reach',
+    );
+}
+```
+
+Bubble sizes are compared across every series in the result and mapped to a
+consistent visual range. Points without a size use the regular scatter marker.
+Axis labels are optional.
+
 ## Optional Description And Controls
 
 Axis graph base classes provide no description and no controls by default.
@@ -272,13 +314,23 @@ contains one non-negative numeric or `null` value per category, a
 `PictorialBarSymbolEnum`, and a `PictorialBarModeEnum`. Series keys remain
 unique lowercase kebab-case identifiers.
 
+## Scatter Result Contract
+
+`ScatterGraphResultData` contains one or more uniquely keyed
+`ScatterSeriesData` instances and optional horizontal and vertical axis labels.
+Each series contains `ScatterPointData` instances with numeric coordinates, an
+optional non-negative bubble value, and an optional non-empty point label. A
+plain scatter graph omits point sizes; a bubble graph supplies them. Both use
+the same `axis.scatter` type and lazy chart module.
+
 ## Renderer Loading
 
-The package registers small `axis.line`, `axis.bar`, and `axis.pictorial-bar`
-entrypoints with Velor's frontend renderer registry. Each concrete renderer
-loads asynchronously only when its graph type is present. The package build
-imports ECharts core, `LineChart`, `BarChart`, `PictorialBarChart`, grid, legend,
-tooltip, and `CanvasRenderer`; each chart module remains in its own lazy chunk.
+The package registers small `axis.line`, `axis.bar`, `axis.pictorial-bar`, and
+`axis.scatter` entrypoints with Velor's frontend renderer registry. Each
+concrete renderer loads asynchronously only when its graph type is present. The
+package build imports ECharts core, `LineChart`, `BarChart`,
+`PictorialBarChart`, `ScatterChart`, grid, legend, tooltip, and
+`CanvasRenderer`; each chart module remains in its own lazy chunk.
 
 The line renderer supports multiple series and recognizes an optional
 client-side `scale` control with `linear` and `logarithmic` values. Server-side
@@ -292,8 +344,11 @@ The package provides:
 - `BarGraphInterface`, `AbstractBarGraph`, and validated bar result DTOs;
 - vertical, horizontal, grouped, stacked, and percentage bar presentations;
 - pictorial bars with predefined scaled or repeated symbols;
-- automatic registration of `axis.line`, `axis.bar`, and `axis.pictorial-bar`;
-- lazy multi-series line, bar, and pictorial bar renderers;
+- scatter and bubble graphs with multiple series, optional point labels, and
+  optional axis labels;
+- automatic registration of `axis.line`, `axis.bar`, `axis.pictorial-bar`, and
+  `axis.scatter`;
+- lazy multi-series line, bar, pictorial bar, and scatter renderers;
 - linear and logarithmic presentation scales.
 
 Graph placement and authenticated data endpoints remain core concerns. Custom
@@ -329,6 +384,13 @@ Publish or remove the repeated-symbol Weekly Visitors example with:
 ```bash
 php artisan velor:graph:example:publish axis.weekly-visitors-pictorial-bar
 php artisan velor:graph:example:remove axis.weekly-visitors-pictorial-bar
+```
+
+Publish or remove the multi-series Marketing Reach bubble example with:
+
+```bash
+php artisan velor:graph:example:publish axis.marketing-reach-scatter
+php artisan velor:graph:example:remove axis.marketing-reach-scatter
 ```
 
 ## Package Development

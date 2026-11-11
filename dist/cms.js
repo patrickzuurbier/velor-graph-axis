@@ -4,7 +4,7 @@ const a = [
     type: "axis.bar",
     version: 1,
     load: async () => {
-      const { createBarGraphRenderer: r } = await import("./assets/barGraphRenderer-kyA5CKd5.js");
+      const { createBarGraphRenderer: r } = await import("./assets/barGraphRenderer-By6_6HF0.js");
       return r;
     }
   },
@@ -12,7 +12,7 @@ const a = [
     type: "axis.line",
     version: 1,
     load: async () => {
-      const { createLineGraphRenderer: r } = await import("./assets/lineGraphRenderer-Dr84Z6Ak.js");
+      const { createLineGraphRenderer: r } = await import("./assets/lineGraphRenderer-B4Kw7Jog.js");
       return r;
     }
   },
@@ -20,7 +20,15 @@ const a = [
     type: "axis.pictorial-bar",
     version: 1,
     load: async () => {
-      const { createPictorialBarGraphRenderer: r } = await import("./assets/pictorialBarGraphRenderer-DTNOqje4.js");
+      const { createPictorialBarGraphRenderer: r } = await import("./assets/pictorialBarGraphRenderer-BuA0vFwF.js");
+      return r;
+    }
+  },
+  {
+    type: "axis.scatter",
+    version: 1,
+    load: async () => {
+      const { createScatterGraphRenderer: r } = await import("./assets/scatterGraphRenderer-B0A89jw1.js");
       return r;
     }
   }

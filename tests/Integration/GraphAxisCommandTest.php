@@ -104,6 +104,7 @@ class GraphAxisCommandTest extends AbstractIntegrationTestCase
                 'axis.weekly-visitors-pictorial-bar',
                 'WeeklyVisitorsPictorialBarGraph.php',
             ],
+            'scatter' => ['axis.marketing-reach-scatter', 'MarketingReachScatterGraph.php'],
         ];
     }
 
@@ -121,6 +122,13 @@ class GraphAxisCommandTest extends AbstractIntegrationTestCase
                 'AbstractPictorialBarGraph',
                 'weekly-visitors',
                 'Weekly Visitors',
+            ],
+            'scatter' => [
+                'MarketingReach',
+                'axis.scatter',
+                'AbstractScatterGraph',
+                'marketing-reach',
+                'Marketing Reach',
             ],
         ];
     }

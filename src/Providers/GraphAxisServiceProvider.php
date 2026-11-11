@@ -15,6 +15,8 @@ use Velor\GraphAxis\Contracts\LineGraphInterface;
 use Velor\GraphAxis\Contracts\LineGraphResultInterface;
 use Velor\GraphAxis\Contracts\PictorialBarGraphInterface;
 use Velor\GraphAxis\Contracts\PictorialBarGraphResultInterface;
+use Velor\GraphAxis\Contracts\ScatterGraphInterface;
+use Velor\GraphAxis\Contracts\ScatterGraphResultInterface;
 
 class GraphAxisServiceProvider extends ServiceProvider
 {
@@ -47,6 +49,13 @@ class GraphAxisServiceProvider extends ServiceProvider
             resultContract: PictorialBarGraphResultInterface::class,
             generatorStub: $packagePath . '/stubs/axis.pictorial-bar.stub',
         ));
+        $graphTypes->register(new GraphTypeData(
+            key: ScatterGraphInterface::TYPE,
+            version: 1,
+            graphContract: ScatterGraphInterface::class,
+            resultContract: ScatterGraphResultInterface::class,
+            generatorStub: $packagePath . '/stubs/axis.scatter.stub',
+        ));
 
         $graphExamples->register(new GraphExampleData(
             key: 'axis.quarterly-sales-bar',
@@ -62,6 +71,11 @@ class GraphAxisServiceProvider extends ServiceProvider
             key: 'axis.weekly-visitors-pictorial-bar',
             source: $packagePath . '/examples/WeeklyVisitorsPictorialBarGraph.php',
             target: 'WeeklyVisitorsPictorialBarGraph.php',
+        ));
+        $graphExamples->register(new GraphExampleData(
+            key: 'axis.marketing-reach-scatter',
+            source: $packagePath . '/examples/MarketingReachScatterGraph.php',
+            target: 'MarketingReachScatterGraph.php',
         ));
     }
 }

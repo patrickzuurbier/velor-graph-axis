@@ -4635,6 +4635,9 @@ function KS(t, e, r) {
     modDataCount: t.get("progressiveChunkMode") === "mod" ? t.getData().count() : null
   };
 }
+function YI(t, e) {
+  O(t.start === e.start && t.end === e.end);
+}
 function vh(t) {
   return {
     overallReset: t
@@ -4714,7 +4717,7 @@ function vr(t, e, r) {
     gv(n, e, r);
   });
 }
-function YI(t, e) {
+function XI(t, e) {
   switch (e) {
     case "emphasis":
       t.hoverState = Ws;
@@ -4975,7 +4978,7 @@ function uf(t, e, r) {
 function pT(t) {
   im(t, !1);
 }
-function XI(t, e, r, n) {
+function ZI(t, e, r, n) {
   n ? pT(t) : uf(t, e, r);
 }
 function gT(t, e, r) {
@@ -4987,7 +4990,7 @@ var Sv = ["emphasis", "blur", "select"], mT = {
   lineStyle: "getLineStyle",
   areaStyle: "getAreaStyle"
 };
-function ZI(t, e, r, n) {
+function $I(t, e, r, n) {
   r = r || "itemStyle";
   for (var i = 0; i < Sv.length; i++) {
     var a = Sv[i], o = e.getModel([a, r]), s = t.ensureState(a);
@@ -5844,7 +5847,7 @@ function tx(t, e, r) {
     i.isGroup || Mv(i, e, r, n);
   }) : Mv(t, e, r, n);
 }
-function $I(t) {
+function qI(t) {
   jT(t).oldStyle = t.style;
 }
 var hf = {}, nn = ["x", "y"], pa = ["width", "height"], dm = 0, pm = 1, gm = 2;
@@ -6263,7 +6266,7 @@ function xx(t, e, r, n) {
   } else u && (u.ignore = !0);
   t.dirty();
 }
-function qI(t, e) {
+function KI(t, e) {
   e = e || "label";
   for (var r = {
     normal: t.getModel(e)
@@ -6365,7 +6368,7 @@ function Dx(t, e) {
   ].join(" "));
 }
 var Dm = pe();
-function KI(t, e, r, n) {
+function QI(t, e, r, n) {
   if (t) {
     var i = Dm(t);
     i.prevValue = i.value, i.value = r;
@@ -8243,7 +8246,7 @@ function Dw(t, e, r) {
     u && (n == null && (n = o), a.ordinalMeta = u.getOrdinalMeta(), e && (a.createInvertedIndices = !0)), a.otherDims.itemName != null && (i = !0);
   }), !i && n != null && (t[n].otherDims.itemName = 0), n;
 }
-function QI(t, e, r) {
+function JI(t, e, r) {
   r = r || {};
   var n = e.getSourceManager(), i, a = !1;
   i = n.getSource(), a = i.sourceFormat === ht;
@@ -10304,14 +10307,14 @@ function Zh(t, e, r, n, i, a, o) {
     }
   }), u.__isEmptyBrush = s, u.setColor = $b, a && u.setColor(a), u;
 }
-function JI(t) {
+function jI(t) {
   return B(t) || (t = [+t, +t]), [t[0] || 0, t[1] || 0];
 }
 function qb(t, e) {
   if (t != null)
     return B(t) || (t = [t, t]), [Bt(t[0], e[0]) || 0, Bt(G(t[1], t[0]), e[1]) || 0];
 }
-function jI(t, e) {
+function eL(t, e) {
   var r = t.mapDimensionsAll("defaultedLabel"), n = r.length;
   if (n === 1) {
     var i = di(t, e, r[0]);
@@ -10322,7 +10325,7 @@ function jI(t, e) {
     return a.join(" ");
   }
 }
-function eL(t, e) {
+function tL(t, e) {
   var r = t.mapDimensionsAll("defaultedLabel");
   if (!B(e))
     return e + "";
@@ -10332,8 +10335,8 @@ function eL(t, e) {
   }
   return n.join(" ");
 }
-var Kb = typeof Float32Array !== xi ? Float32Array : void 0, tL = typeof Float64Array !== xi ? Float64Array : void 0;
-function rL(t) {
+var Kb = typeof Float32Array !== xi ? Float32Array : void 0, rL = typeof Float64Array !== xi ? Float64Array : void 0;
+function nL(t) {
   return Qb({
     ctor: Kb
   }, t).arr;
@@ -10497,7 +10500,7 @@ function iC(t, e, r) {
   }
   return o;
 }
-function nL(t, e, r, n, i) {
+function iL(t, e, r, n, i) {
   if (t) {
     if (t.type === "polar")
       return iC(t, e, r);
@@ -10505,6 +10508,11 @@ function nL(t, e, r, n, i) {
       return nC(t, e, r, n, i);
   } else return null;
   return null;
+}
+function aL(t) {
+  var e = t.coordinateSystem;
+  if (t.get("clip", !0) && e && (!e.shouldClip || e.shouldClip()))
+    return e.getArea && e.getArea(0.1);
 }
 var Lt = (
   /** @class */
@@ -11615,7 +11623,7 @@ function ZC(t) {
 function wi(t) {
   return au(t).fullUpdate;
 }
-var $C = XS(), Df = "|&", bi = pe(), qC = -2, iL = -1, KC = pe(), wn;
+var $C = XS(), Df = "|&", bi = pe(), qC = -2, oL = -1, KC = pe(), wn;
 process.env.NODE_ENV !== "production" && (wn = function(t) {
   O(t && t.model && t.model.uid && t.model.ecModel);
 });
@@ -11652,7 +11660,7 @@ function jC(t, e) {
   var r = t.model.ecModel, n = bi(wi(r)).axSer;
   n && By(r, n.get(t.model.uid), e);
 }
-function aL(t, e, r) {
+function sL(t, e, r) {
   process.env.NODE_ENV !== "production" && (O(e != null), wn(t));
   var n = jh(t, e);
   n && By(t.model.ecModel, n.sers, r);
@@ -11664,7 +11672,7 @@ function By(t, e, r) {
       t.isSeriesFiltered(i) || r(i);
     }
 }
-function oL(t, e, r) {
+function uL(t, e, r) {
   process.env.NODE_ENV !== "production" && O(e != null);
   var n = bi(wi(t)).keyed, i = n && n.get(e);
   i && i.each(function(a) {
@@ -11689,7 +11697,7 @@ function eD(t) {
     n.metrics.liPosMinGap && Fy.liPosMinGap(t, n, s);
   });
 }
-function sL(t, e) {
+function lL(t, e) {
   Fy[t] = e;
 }
 var Fy = {};
@@ -11721,7 +11729,7 @@ function vd(t, e, r) {
 function Ef(t, e, r) {
   return t + Df + G(e, !0) + Df + (r || "");
 }
-function uL(t, e) {
+function fL(t, e) {
   var r = Ef(e.seriesType, e.baseAxis, e.coordSysType);
   process.env.NODE_ENV !== "production" && (O(e.seriesType && e.key && !Mf.get(e.key) && !gs.get(r)), Mf.set(e.key, 1)), gs.set(r, e), $C(t, function() {
     t.registerProcessor(t.PRIORITY.PROCESSOR.AXIS_STATISTICS, {
@@ -12526,7 +12534,7 @@ function _s(t, e, r) {
   var m = e.get(["axisLabel", "rotate"]);
   return i.labelRotate = s === "top" ? -m : m, i.z2 = 1, i;
 }
-function lL(t) {
+function hL(t) {
   return t.coordinateSystem && t.coordinateSystem.type === "cartesian2d";
 }
 function AD(t) {
@@ -12689,7 +12697,7 @@ function zD(t, e) {
 function Qy(t, e, r) {
   t.rawExtentInfo = e, e.from = r;
 }
-function fL(t, e) {
+function cL(t, e) {
   process.env.NODE_ENV !== "production" && O(!Ss.get(t)), Ss.set(t, e);
 }
 var Ss = W();
@@ -16774,7 +16782,7 @@ function $e(t) {
   process.env.NODE_ENV !== "production" && Ke("Instance " + t + " has been disposed");
 }
 var As = {}, Is = {}, Vf = {}, Ff = [], zf = [], Ls = [], V_ = {}, Hf = {}, ha = {}, mp = {}, XM = +/* @__PURE__ */ new Date() - 0, oc = "_echarts_instance_";
-function hL(t, e, r) {
+function vL(t, e, r) {
   var n = !(r && r.ssr);
   if (n) {
     if (process.env.NODE_ENV !== "production" && !t)
@@ -18816,7 +18824,7 @@ function e0(t) {
     update: ":updateAxisPointer"
   }, jA);
 }
-function cL(t) {
+function dL(t) {
   Sn(PA), Sn(e0);
 }
 function sI(t, e) {
@@ -19550,7 +19558,7 @@ function CI(t, e, r) {
     }
   }
 }
-function vL(t) {
+function pL(t) {
   Sn(e0), t.registerComponentModel(uI), t.registerComponentView(TI), t.registerAction({
     type: "showTip",
     event: "showTip",
@@ -20267,7 +20275,7 @@ function PI(t) {
 function RI(t) {
   Sn(o0), t.registerComponentModel(OI), t.registerComponentView(NI), PI(t);
 }
-function dL(t) {
+function gL(t) {
   Sn(o0), Sn(RI);
 }
 function Qp(t, e, r) {
@@ -20759,115 +20767,119 @@ var ca = 1, Kf = 2, l0 = 4, Do = ca | l0, HI = (function() {
     return this._height;
   }, t;
 })();
-function pL(t) {
+function mL(t) {
   t.registerPainter("canvas", HI);
 }
 export {
-  rL as $,
+  q as $,
   WI as A,
   e_ as B,
   pn as C,
-  eL as D,
-  hL as E,
+  tL as D,
+  vL as E,
   Sn as F,
   ft as G,
-  cL as H,
-  dL as I,
-  vL as J,
-  pL as K,
+  dL as H,
+  gL as I,
+  pL as J,
+  mL as K,
   Zh as L,
   mn as M,
-  G as N,
-  nf as O,
+  ww as N,
+  nL as O,
   Se as P,
-  af as Q,
+  ui as Q,
   Me as R,
   Zs as S,
-  qb as T,
-  vm as U,
-  JI as V,
-  gm as W,
-  H as X,
-  ww as Y,
-  Tn as Z,
+  Tg as T,
+  Ge as U,
+  _e as V,
+  ya as W,
+  ye as X,
+  Ra as Y,
+  XI as Z,
   F as _,
   dg as a,
-  ui as a0,
-  Tg as a1,
-  Ge as a2,
-  _e as a3,
-  ya as a4,
-  ye as a5,
-  Ra as a6,
-  YI as a7,
-  q as a8,
-  ut as a9,
-  qC as aA,
-  Df as aB,
-  er as aC,
-  ou as aD,
-  O as aE,
-  uL as aF,
-  oL as aG,
-  lL as aH,
-  XS as aI,
-  oD as aJ,
-  aL as aK,
-  Oe as aL,
-  fL as aM,
-  et as aN,
-  lt as aO,
-  ve as aP,
-  zo as aQ,
-  UI as aa,
-  iu as ab,
-  YT as ac,
-  nC as ad,
-  iC as ae,
-  Ar as af,
-  GS as ag,
-  GI as ah,
-  Vt as ai,
-  Jb as aj,
-  V as ak,
-  Bt as al,
-  Xs as am,
-  ii as an,
-  Vg as ao,
-  Sx as ap,
-  sL as aq,
-  W as ar,
-  Kx as as,
-  Qb as at,
-  Pg as au,
-  iL as av,
-  $t as aw,
-  tL as ax,
-  By as ay,
-  Qx as az,
+  ut as a0,
+  UI as a1,
+  iu as a2,
+  YT as a3,
+  nC as a4,
+  iC as a5,
+  Ar as a6,
+  GS as a7,
+  GI as a8,
+  Vt as a9,
+  hL as aA,
+  Jb as aB,
+  XS as aC,
+  oD as aD,
+  sL as aE,
+  Oe as aF,
+  cL as aG,
+  et as aH,
+  lt as aI,
+  ve as aJ,
+  zo as aK,
+  Z as aL,
+  YI as aM,
+  aL as aN,
+  PA as aO,
+  G as aP,
+  nf as aQ,
+  af as aR,
+  jI as aS,
+  gm as aT,
+  H as aU,
+  V as aa,
+  qb as ab,
+  vm as ac,
+  Bt as ad,
+  Xs as ae,
+  ii as af,
+  Vg as ag,
+  Sx as ah,
+  Tn as ai,
+  lL as aj,
+  W as ak,
+  Kx as al,
+  Qb as am,
+  Pg as an,
+  oL as ao,
+  $t as ap,
+  rL as aq,
+  By as ar,
+  Qx as as,
+  qC as at,
+  Df as au,
+  er as av,
+  ou as aw,
+  O as ax,
+  fL as ay,
+  uL as az,
   we as b,
-  QI as c,
+  JI as c,
   B as d,
   si as e,
   xm as f,
   Ch as g,
-  nL as h,
+  iL as h,
   Ow as i,
   Te as j,
   R as k,
   Dm as l,
   X as m,
-  qI as n,
+  KI as n,
   xx as o,
   KS as p,
-  jI as q,
+  eL as q,
   tx as r,
-  $I as s,
+  qI as s,
   Y as t,
   qs as u,
-  KI as v,
+  QI as v,
   Ke as w,
-  XI as x,
-  ZI as y,
+  ZI as x,
+  $I as y,
   w as z
 };

@@ -1,8 +1,8 @@
 var se = Object.defineProperty;
 var ce = (t, a, e) => a in t ? se(t, a, { enumerable: !0, configurable: !0, writable: !0, value: e }) : t[a] = e;
 var V = (t, a, e) => ce(t, typeof a != "symbol" ? a + "" : a, e);
-import { _ as q, h as ue, j as ve, C as pe, T as de, G, o as he, q as fe, n as ge, x as me, u as F, z as J, U as ye, d as K, al as L, am as Se, an as xe, ao as _e, k as w, R as Q, ap as N, L as Pe, Z as Re, i as be, t as Ce, E as De, F as Ie, H as we, I as ze, J as Ae, K as Be } from "./installCanvasRenderer-C92rs6a1.js";
-import { b, B as X, c as Le, a as Oe, r as Te } from "./BaseBarSeries-C-3XRLgx.js";
+import { _ as F, h as ue, j as ve, C as pe, ab as de, G, o as he, q as fe, n as ge, x as me, u as J, z as K, ac as ye, d as Q, ad as L, ae as Se, af as xe, ag as _e, k as w, R as Z, ah as N, L as Pe, ai as be, i as Re, t as Ce, E as De, F as Ie, H as we, I as ze, J as Ae, K as Be } from "./installCanvasRenderer-CJsrED7t.js";
+import { b as R, B as X, c as Le, a as Oe, r as Te } from "./BaseBarSeries-vN-5r6zc.js";
 /*! Third-party licenses: see THIRD_PARTY_NOTICES.md and licenses/ in the Composer package. */
 var Ee = ["itemStyle", "borderWidth"], k = [{
   xy: "x",
@@ -17,10 +17,10 @@ var Ee = ["itemStyle", "borderWidth"], k = [{
 }], A = new Se(), Ye = (
   /** @class */
   (function(t) {
-    q(a, t);
+    F(a, t);
     function a() {
       var e = t !== null && t.apply(this, arguments) || this;
-      return e.type = b, e;
+      return e.type = R, e;
     }
     return a.prototype.render = function(e, i, r) {
       var n = this.group, o = e.getData(), d = this._data, h = e.coordinateSystem, f = h.getBaseAxis(), v = f.isHorizontal(), p = h.master.getRect(), l = {
@@ -59,7 +59,7 @@ var Ee = ["itemStyle", "borderWidth"], k = [{
       e.get("animation") ? n && n.eachItemGraphicEl(function(o) {
         j(n, ve(o).dataIndex, e, o);
       }) : r.removeAll();
-    }, a.type = b, a;
+    }, a.type = R, a;
   })(pe)
 );
 function H(t, a, e, i) {
@@ -84,7 +84,7 @@ function H(t, a, e, i) {
 }
 function Ve(t, a, e, i, r) {
   var n = i.valueDim, o = t.get("symbolBoundingData"), d = i.coordSys.getOtherAxis(i.coordSys.getBaseAxis()), h = d.toGlobalCoord(d.dataToCoord(0)), f = 1 - +(e[n.wh] <= 0), v;
-  if (K(o)) {
+  if (Q(o)) {
     var p = [B(d, o[0]) - h, B(d, o[1]) - h];
     p[1] < p[0] && p.reverse(), v = p[f];
   } else o != null ? v = B(d, o) - h : a ? v = i.coordSysExtent[n.index][f] - h : v = e[n.wh];
@@ -97,7 +97,7 @@ function B(t, a) {
 }
 function Ge(t, a, e, i, r, n, o, d, h, f) {
   var v = h.valueDim, p = h.categoryDim, l = Math.abs(e[p.wh]), u = t.getItemVisual(a, "symbolSize"), s;
-  K(u) ? s = u.slice() : u == null ? s = ["100%", "100%"] : s = [u, u], s[p.index] = L(s[p.index], l), s[v.index] = L(s[v.index], i ? l : Math.abs(n)), f.symbolSize = s;
+  Q(u) ? s = u.slice() : u == null ? s = ["100%", "100%"] : s = [u, u], s[p.index] = L(s[p.index], l), s[v.index] = L(s[v.index], i ? l : Math.abs(n)), f.symbolSize = s;
   var c = f.symbolScale = [s[0] / d, s[1] / d];
   c[v.index] *= (h.isHorizontal ? -1 : 1) * o;
 }
@@ -114,15 +114,15 @@ function ke(t, a, e, i, r, n, o, d, h, f, v, p) {
   if (i) {
     var m = Math.abs(h), y = xe(t.get("symbolMargin"), "15%") + "", S = !1;
     y.lastIndexOf("!") === y.length - 1 && (S = !0, y = y.slice(0, y.length - 1));
-    var x = L(y, a[u.index]), C = Math.max(c + x * 2, 0), D = S ? 0 : x * 2, T = _e(i), _ = T ? i : Z((m + D) / C), le = m - _ * c;
-    x = le / 2 / (S ? _ : Math.max(_ - 1, 1)), C = c + x * 2, D = S ? 0 : x * 2, !T && i !== "fixed" && (_ = f ? Z((Math.abs(f) + D) / C) : 0), g = _ * C - D, p.repeatTimes = _, p.symbolMargin = x;
+    var x = L(y, a[u.index]), C = Math.max(c + x * 2, 0), D = S ? 0 : x * 2, T = _e(i), _ = T ? i : q((m + D) / C), le = m - _ * c;
+    x = le / 2 / (S ? _ : Math.max(_ - 1, 1)), C = c + x * 2, D = S ? 0 : x * 2, !T && i !== "fixed" && (_ = f ? q((Math.abs(f) + D) / C) : 0), g = _ * C - D, p.repeatTimes = _, p.symbolMargin = x;
   }
-  var z = s * (g / 2), R = p.pathPosition = [];
-  R[l.index] = e[l.wh] / 2, R[u.index] = o === "start" ? z : o === "end" ? h - z : h / 2, n && (R[0] += n[0], R[1] += n[1]);
+  var z = s * (g / 2), b = p.pathPosition = [];
+  b[l.index] = e[l.wh] / 2, b[u.index] = o === "start" ? z : o === "end" ? h - z : h / 2, n && (b[0] += n[0], b[1] += n[1]);
   var E = p.bundlePosition = [];
   E[l.index] = e[l.xy], E[u.index] = e[u.xy];
   var Y = p.barRectShape = w({}, e);
-  Y[u.wh] = s * Math.max(Math.abs(e[u.wh]), Math.abs(R[u.index] + z)), Y[l.wh] = e[l.wh];
+  Y[u.wh] = s * Math.max(Math.abs(e[u.wh]), Math.abs(b[u.index] + z)), Y[l.wh] = e[l.wh];
   var I = p.clipShape = {};
   I[l.xy] = -e[l.xy], I[l.wh] = v.ecSize[l.wh], I[u.xy] = 0, I[u.wh] = e[u.wh];
 }
@@ -199,7 +199,7 @@ function ae(t, a, e) {
   var i = w({}, a.barRectShape), r = t.__pictorialBarRect;
   r ? P(r, null, {
     shape: i
-  }, a, e) : (r = t.__pictorialBarRect = new Q({
+  }, a, e) : (r = t.__pictorialBarRect = new Z({
     z2: 2,
     shape: i,
     silent: !0,
@@ -214,11 +214,11 @@ function ie(t, a, e, i) {
   if (e.symbolClip) {
     var r = t.__pictorialClipPath, n = w({}, e.clipShape), o = a.valueDim, d = e.animationModel, h = e.dataIndex;
     if (r)
-      F(r, {
+      J(r, {
         shape: n
       }, d, h);
     else {
-      n[o.wh] = 0, r = new Q({
+      n[o.wh] = 0, r = new Z({
         shape: n
       }), t.__pictorialBundle.setClipPath(r), t.__pictorialClipPath = r;
       var f = {};
@@ -247,7 +247,7 @@ function U(t, a, e, i) {
 }
 function Ue(t, a, e) {
   var i = e.animationModel, r = e.dataIndex, n = t.__pictorialBundle;
-  F(n, {
+  J(n, {
     x: e.bundlePosition[0],
     y: e.bundlePosition[1]
   }, i, r), e.symbolRepeat ? ee(t, a, e, !0) : te(t, a, e, !0), ae(t, e, !0), ie(t, a, e, !0);
@@ -258,7 +258,7 @@ function j(t, a, e, i) {
   var n = [];
   O(i, function(o) {
     n.push(o);
-  }), i.__pictorialMainPath && n.push(i.__pictorialMainPath), i.__pictorialClipPath && (e = null), J(n, function(o) {
+  }), i.__pictorialMainPath && n.push(i.__pictorialMainPath), i.__pictorialClipPath && (e = null), K(n, function(o) {
     ye(o, {
       scaleX: 0,
       scaleY: 0
@@ -271,7 +271,7 @@ function re(t, a) {
   return [t.getItemVisual(a.dataIndex, "symbol") || "none", !!a.symbolRepeat, !!a.symbolClip].join(":");
 }
 function O(t, a, e) {
-  J(t.__pictorialBundle.children(), function(i) {
+  K(t.__pictorialBundle.children(), function(i) {
     i !== t.__pictorialBarRect && a.call(e, i);
   });
 }
@@ -281,7 +281,7 @@ function P(t, a, e, i, r, n) {
 function $(t, a, e) {
   var i = e.dataIndex, r = e.itemModel, n = r.getModel("emphasis"), o = n.getModel("itemStyle").getItemStyle(), d = r.getModel(["blur", "itemStyle"]).getItemStyle(), h = r.getModel(["select", "itemStyle"]).getItemStyle(), f = r.getShallow("cursor"), v = n.get("focus"), p = n.get("blurScope"), l = n.get("scale");
   O(t, function(c) {
-    if (c instanceof Re) {
+    if (c instanceof be) {
       var g = c.style;
       c.useStyle(w({
         // TODO other properties like dx, dy ?
@@ -306,21 +306,21 @@ function $(t, a, e) {
     defaultOutsidePosition: u
   }), me(t, v, p, n.get("disabled"));
 }
-function Z(t) {
+function q(t) {
   var a = Math.round(t);
   return Math.abs(t - a) < 1e-4 ? a : Math.ceil(t);
 }
 var je = (
   /** @class */
   (function(t) {
-    q(a, t);
+    F(a, t);
     function a() {
       var e = t !== null && t.apply(this, arguments) || this;
       return e.type = a.type, e.hasSymbolVisual = !0, e.defaultSymbol = "roundRect", e;
     }
     return a.prototype.getInitialData = function(e) {
       return e.stack = null, t.prototype.getInitialData.apply(this, arguments);
-    }, a.type = "series." + b, a.dependencies = ["grid"], a.defaultOption = be(X.defaultOption, {
+    }, a.type = "series." + R, a.dependencies = ["grid"], a.defaultOption = Re(X.defaultOption, {
       symbol: "circle",
       symbolSize: null,
       symbolRotate: null,
@@ -353,7 +353,7 @@ var je = (
   })(X)
 );
 function $e(t) {
-  t.registerChartView(Ye), t.registerSeriesModel(je), t.registerLayout(t.PRIORITY.VISUAL.LAYOUT, Le(b)), t.registerLayout(t.PRIORITY.VISUAL.PROGRESSIVE_LAYOUT, Oe(b)), Te(t);
+  t.registerChartView(Ye), t.registerSeriesModel(je), t.registerLayout(t.PRIORITY.VISUAL.LAYOUT, Le(R)), t.registerLayout(t.PRIORITY.VISUAL.PROGRESSIVE_LAYOUT, Oe(R)), Te(t);
 }
 const ne = {
   arrow: "arrow",
@@ -364,7 +364,7 @@ const ne = {
   "rounded-rectangle": "roundRect",
   triangle: "triangle"
 };
-function Ze(t) {
+function qe(t) {
   if (typeof t != "object" || t === null || !("categories" in t) || !("series" in t) || !("orientation" in t))
     return !1;
   const a = t.categories, e = t.series;
@@ -374,7 +374,7 @@ function oe(t) {
   const a = t.series.flatMap((e) => e.values).filter((e) => e !== null);
   return Math.max(0, ...a);
 }
-function qe(t) {
+function Fe(t) {
   const a = oe(t);
   return t.series.map((e) => {
     const i = e.mode === "repeated";
@@ -394,13 +394,13 @@ function qe(t) {
   });
 }
 Ie([$e, we, ze, Ae, Be]);
-class Fe {
+class Je {
   constructor(a) {
     V(this, "chart");
     this.chart = De(a, void 0, { renderer: "canvas" });
   }
   render(a) {
-    if (!Ze(a))
+    if (!qe(a))
       throw new Error("The pictorial bar graph data is invalid.");
     const e = getComputedStyle(document.documentElement), i = e.getPropertyValue("--bs-body-color").trim() || "#212529", r = e.getPropertyValue("--cms-border").trim() || "#dee2e6", n = e.getPropertyValue("--cms-surface").trim() || "#ffffff", o = {
       type: "category",
@@ -434,7 +434,7 @@ class Fe {
       },
       xAxis: h ? d : o,
       yAxis: h ? o : d,
-      series: qe(a)
+      series: Fe(a)
     };
     this.chart.setOption(f, !0);
   }
@@ -445,7 +445,7 @@ class Fe {
     this.chart.dispose();
   }
 }
-const Ne = (t) => new Fe(t);
+const Ne = (t) => new Je(t);
 export {
   Ne as createPictorialBarGraphRenderer
 };

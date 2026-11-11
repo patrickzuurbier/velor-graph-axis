@@ -1,0 +1,36 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use App\Services\Graphs\Contracts\GraphContextInterface;
+use Velor\GraphAxis\AbstractScatterGraph;
+use Velor\GraphAxis\Contracts\ScatterGraphResultInterface;
+use Velor\GraphAxis\Data\ScatterGraphResultData;
+use Velor\GraphAxis\Data\ScatterPointData;
+use Velor\GraphAxis\Data\ScatterSeriesData;
+
+class {{ class }} extends AbstractScatterGraph
+{
+    public function key(): string
+    {
+        return '{{ graphKey }}';
+    }
+
+    public function title(): string
+    {
+        return '{{ graphTitle }}';
+    }
+
+    public function result(GraphContextInterface $context): ScatterGraphResultInterface
+    {
+        return new ScatterGraphResultData(
+            series: [
+                new ScatterSeriesData('values', 'Values', [
+                    new ScatterPointData(0, 0),
+                ]),
+            ],
+        );
+    }
+}

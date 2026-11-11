@@ -1,14 +1,14 @@
-import { aq as ra, ar as ea, as as na, at as X, au as ia, av as sa, aw as q, ax as oa, ay as ua, az as va, aA as la, aB as fa, aC as ca, aD as J, aE as Q, aF as da, aG as ga, aH as ha, Y as ma, $ as U, aj as pa, aI as Sa, aJ as ya, aK as $, aL as K, aM as Ia, al as R, z as P, aN as ba, aO as Y, aP as C, aQ as N, _ as Aa, c as xa, M as Z } from "./installCanvasRenderer-C92rs6a1.js";
+import { aj as ra, ak as ea, al as na, am as X, an as ia, ao as sa, ap as q, aq as oa, ar as ua, as as va, at as la, au as fa, av as ca, aw as J, ax as Q, ay as da, az as ga, aA as ma, N as ha, O as U, aB as pa, aC as Sa, aD as ya, aE as Z, aF as K, aG as Ia, ad as R, z as P, aH as ba, aI as Y, aJ as C, aK as N, _ as Aa, c as xa, M as $ } from "./installCanvasRenderer-CJsrED7t.js";
 /*! Third-party licenses: see THIRD_PARTY_NOTICES.md and licenses/ in the Composer package. */
 function Da() {
   ra("liPosMinGap", _a);
 }
 function _a(r, t, a) {
-  var e = ea(), f = a.serUids, i = a.liPosMinGap, g, m = t.axis, A = m.scale, b = A.needTransform(), p = A.getFilter ? A.getFilter() : null, x = na(p);
+  var e = ea(), f = a.serUids, i = a.liPosMinGap, g, h = t.axis, A = h.scale, b = A.needTransform(), p = A.getFilter ? A.getFilter() : null, x = na(p);
   function d(n) {
     ua(r, t.sers, function(S) {
-      var l = S.getRawData(), h = l.getDimensionIndex(l.mapDimension(m.dim));
-      h >= 0 && n(h, S, l.getStore());
+      var l = S.getRawData(), m = l.getDimensionIndex(l.mapDimension(h.dim));
+      m >= 0 && n(m, S, l.getStore());
     });
   }
   var I = 0;
@@ -18,16 +18,16 @@ function _a(r, t, a) {
     t.liPosMinGap = i;
     return;
   }
-  X(w, I);
+  X(B, I);
   var u = 0;
   d(function(n, S, l) {
-    for (var h = 0, y = l.count(); h < y; ++h) {
-      var D = l.get(n, h);
-      isFinite(D) && (!p || va(x, D)) && (b && (D = A.transformIn(D, null)), w.arr[u++] = D);
+    for (var m = 0, y = l.count(); m < y; ++m) {
+      var D = l.get(n, m);
+      isFinite(D) && (!p || va(x, D)) && (b && (D = A.transformIn(D, null)), B.arr[u++] = D);
     }
   });
-  var o = w.typed ? w.arr.subarray(0, u) : (w.arr.length = u, w.arr);
-  w.typed ? o.sort() : ia(o);
+  var o = B.typed ? B.arr.subarray(0, u) : (B.arr.length = u, B.arr);
+  B.typed ? o.sort() : ia(o);
   for (var s = 1 / 0, c = 1; c < u; ++c) {
     var v = o[c] - o[c - 1];
     // - Different series normally have the same values (e.g., barA, barB, barC),
@@ -38,7 +38,7 @@ function _a(r, t, a) {
   }
   a.liPosMinGap = t.liPosMinGap = q(s) ? s : u > 0 ? la : sa, a.serUids = e;
 }
-var w = X(
+var B = X(
   {
     ctor: oa
   },
@@ -66,7 +66,7 @@ function La(r) {
   };
 }
 var ka = "bar", Ca = "pictorialBar";
-function Ma(r, t, a, e) {
+function wa(r, t, a, e) {
   da(r, {
     key: t,
     seriesType: a,
@@ -74,11 +74,11 @@ function Ma(r, t, a, e) {
     getMetrics: La
   });
 }
-function wa(r) {
+function Ba(r) {
   var t = r.scale.rawExtentInfo.makeRenderInfo().startValue;
   return process.env.NODE_ENV !== "production" && Q(q(t)), t;
 }
-var Ba = Sa(), Oa = "__ec_stack_";
+var Ma = Sa(), Oa = "__ec_stack_";
 function j(r) {
   return r.get("stack") || Oa + r.seriesIndex;
 }
@@ -93,7 +93,7 @@ function Ea(r, t) {
     },
     min: 1
   });
-  return $(r, a, function(i) {
+  return Z(r, a, function(i) {
     e.push({
       barWidth: R(i.get("barWidth"), f.w),
       barMaxWidth: R(i.get("barMaxWidth"), f.w),
@@ -114,13 +114,13 @@ function Ea(r, t) {
   };
 }
 function Pa(r) {
-  var t = r.bandWidthResult.w, a = t, e = 0, f, i, g = [], m = {};
+  var t = r.bandWidthResult.w, a = t, e = 0, f, i, g = [], h = {};
   P(r.seriesInfo, function(o, s) {
     s || (i = o.defaultBarGap || 0);
     var c = o.stackId;
-    ba(m, c) || e++;
-    var v = m[c];
-    v || (v = m[c] = {
+    ba(h, c) || e++;
+    var v = h[c];
+    v || (v = h[c] = {
       width: 0,
       maxWidth: 0
     }, g.push(c));
@@ -130,14 +130,14 @@ function Pa(r) {
     S && (v.maxWidth = S);
     var l = o.barMinWidth;
     l && (v.minWidth = l);
-    var h = o.barGap;
-    h != null && (i = h);
+    var m = o.barGap;
+    m != null && (i = m);
     var y = o.barCategoryGap;
     y != null && (f = y);
   }), f == null && (f = C(35 - g.length * 4, 15) + "%");
   var A = R(f, t), b = R(i, 1), p = (a - A) / (e + (e - 1) * b);
   p = C(p, 0), P(g, function(o) {
-    var s = m[o], c = s.maxWidth, v = s.minWidth;
+    var s = h[o], c = s.maxWidth, v = s.minWidth;
     if (s.width) {
       var n = s.width;
       c && (n = Y(n, c)), v && (n = C(n, v)), s.width = n, a -= n + b * n, e--;
@@ -148,12 +148,12 @@ function Pa(r) {
   }), p = (a - A) / (e + (e - 1) * b), p = C(p, 0);
   var x = 0, d;
   P(g, function(o) {
-    var s = m[o];
+    var s = h[o];
     s.width || (s.width = p), d = s, x += s.width * (1 + b);
   }), d && (x -= d.width * b);
   var I = {}, u = -x / 2;
   return P(g, function(o) {
-    var s = m[o];
+    var s = h[o];
     I[o] = I[o] || {
       bandWidth: t,
       offset: u,
@@ -169,7 +169,7 @@ function Ha(r) {
       ga(t, a, function(e) {
         process.env.NODE_ENV !== "production" && Q(e instanceof ya);
         var f = Wa(e, r);
-        $(e, a, function(i) {
+        Z(e, a, function(i) {
           var g = f.columnMap[j(i)];
           i.getData().setLayout({
             bandWidth: g.bandWidth,
@@ -186,30 +186,30 @@ function za(r) {
     seriesType: r,
     plan: pa(),
     reset: function(t) {
-      if (ha(t)) {
-        var a = t.getData(), e = t.coordinateSystem, f = e.getBaseAxis(), i = e.getOtherAxis(f), g = a.getDimensionIndex(a.mapDimension(i.dim)), m = a.getDimensionIndex(a.mapDimension(f.dim)), A = t.get("showBackground", !0), b = a.mapDimension(i.dim), p = a.getCalculationInfo("stackResultDimension"), x = ma(a, b) && !!a.getCalculationInfo("stackedOnSeries"), d = i.isHorizontal(), I = i.toGlobalCoord(i.dataToCoord(wa(i))), u = aa(t), o = t.get("barMinHeight") || 0, s = p && a.getDimensionIndex(p), c = a.getLayout("size"), v = a.getLayout("offset");
+      if (ma(t)) {
+        var a = t.getData(), e = t.coordinateSystem, f = e.getBaseAxis(), i = e.getOtherAxis(f), g = a.getDimensionIndex(a.mapDimension(i.dim)), h = a.getDimensionIndex(a.mapDimension(f.dim)), A = t.get("showBackground", !0), b = a.mapDimension(i.dim), p = a.getCalculationInfo("stackResultDimension"), x = ha(a, b) && !!a.getCalculationInfo("stackedOnSeries"), d = i.isHorizontal(), I = i.toGlobalCoord(i.dataToCoord(Ba(i))), u = aa(t), o = t.get("barMinHeight") || 0, s = p && a.getDimensionIndex(p), c = a.getLayout("size"), v = a.getLayout("offset");
         return {
           progress: function(n, S) {
-            for (var l = n.count, h = u && U(l * 3), y = u && A && U(l * 3), D = u && U(l), T = e.master.getRect(), ta = d ? T.width : T.height, _, z = S.getStore(), G = 0; (_ = n.next()) != null; ) {
-              var F = z.get(x ? s : g, _), k = z.get(m, _), B = I, V = void 0;
+            for (var l = n.count, m = u && U(l * 3), y = u && A && U(l * 3), D = u && U(l), T = e.master.getRect(), ta = d ? T.width : T.height, _, z = S.getStore(), G = 0; (_ = n.next()) != null; ) {
+              var F = z.get(x ? s : g, _), k = z.get(h, _), M = I, V = void 0;
               x && (V = +F - z.get(g, _));
-              var O = void 0, W = void 0, L = void 0, M = void 0;
+              var O = void 0, W = void 0, L = void 0, w = void 0;
               if (d) {
                 var E = e.dataToPoint([F, k]);
-                x && (B = e.dataToPoint([V, k])[0]), O = B, W = E[1] + v, L = E[0] - B, M = c, K(L) < o && (L = (L < 0 ? -1 : 1) * o);
+                x && (M = e.dataToPoint([V, k])[0]), O = M, W = E[1] + v, L = E[0] - M, w = c, K(L) < o && (L = (L < 0 ? -1 : 1) * o);
               } else {
                 var E = e.dataToPoint([k, F]);
-                x && (B = e.dataToPoint([k, V])[1]), O = E[0] + v, W = B, L = c, M = E[1] - B, K(M) < o && (M = (M <= 0 ? -1 : 1) * o);
+                x && (M = e.dataToPoint([k, V])[1]), O = E[0] + v, W = M, L = c, w = E[1] - M, K(w) < o && (w = (w <= 0 ? -1 : 1) * o);
               }
-              u ? (h[G] = O, h[G + 1] = W, h[G + 2] = d ? L : M, y && (y[G] = d ? T.x : O, y[G + 1] = d ? W : T.y, y[G + 2] = ta), D[_] = _) : S.setItemLayout(_, {
+              u ? (m[G] = O, m[G + 1] = W, m[G + 2] = d ? L : w, y && (y[G] = d ? T.x : O, y[G + 1] = d ? W : T.y, y[G + 2] = ta), D[_] = _) : S.setItemLayout(_, {
                 x: O,
                 y: W,
                 width: L,
-                height: M
+                height: w
               }), G += 3;
             }
             u && S.setLayout({
-              largePoints: h,
+              largePoints: m,
               largeDataIndices: D,
               largeBackgroundPoints: y,
               valueAxisHorizontal: d
@@ -227,10 +227,10 @@ function Ra(r) {
   return Ga(H(r, N));
 }
 function Fa(r) {
-  Ba(r, function() {
+  Ma(r, function() {
     function t(a) {
       var e = H(a, N);
-      Ma(r, e, a, N), Ia(e, Ra(a));
+      wa(r, e, a, N), Ia(e, Ra(a));
     }
     t("bar"), t("pictorialBar");
   });
@@ -250,7 +250,7 @@ var Na = (
     }, t.prototype.getMarkerPosition = function(a, e, f) {
       var i = this.coordinateSystem;
       if (i && i.clampData) {
-        var g = i.clampData(a), m = i.dataToPoint(g);
+        var g = i.clampData(a), h = i.dataToPoint(g);
         if (f)
           P(i.getAxes(), function(d, I) {
             if (d.type === "category" && e != null) {
@@ -258,30 +258,30 @@ var Na = (
               if (c && !o && (s += 1), u.length < 2)
                 return;
               if (u.length === 2) {
-                m[I] = d.toGlobalCoord(d.getExtent()[c ? 1 : 0]);
+                h[I] = d.toGlobalCoord(d.getExtent()[c ? 1 : 0]);
                 return;
               }
               for (var v = void 0, n = void 0, S = 1, l = 0; l < u.length; l++) {
-                var h = u[l].coord, y = l === u.length - 1 ? u[l - 1].tickValue + S : u[l].tickValue;
+                var m = u[l].coord, y = l === u.length - 1 ? u[l - 1].tickValue + S : u[l].tickValue;
                 if (y === s) {
-                  n = h;
+                  n = m;
                   break;
                 } else if (y < s)
-                  v = h;
+                  v = m;
                 else if (v != null && y > s) {
-                  n = (h + v) / 2;
+                  n = (m + v) / 2;
                   break;
                 }
                 l === 1 && (S = y - u[0].tickValue);
               }
-              n == null && (v ? v && (n = u[u.length - 1].coord) : n = u[0].coord), m[I] = d.toGlobalCoord(n);
+              n == null && (v ? v && (n = u[u.length - 1].coord) : n = u[0].coord), h[I] = d.toGlobalCoord(n);
             }
           });
         else {
           var A = this.getData(), b = A.getLayout("offset"), p = A.getLayout("size"), x = i.getBaseAxis().isHorizontal() ? 0 : 1;
-          m[x] += b + p / 2;
+          h[x] += b + p / 2;
         }
-        return m;
+        return h;
       }
       return [NaN, NaN];
     }, t.prototype.__requireStartValue = function(a) {
@@ -304,9 +304,9 @@ var Na = (
       progressiveChunkMode: "mod",
       defaultBarGap: "10%"
     }, t;
-  })(Z)
+  })($)
 );
-Z.registerClass(Na);
+$.registerClass(Na);
 export {
   Na as B,
   ka as S,

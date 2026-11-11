@@ -20,3 +20,6 @@ This project follows semantic versioning: `MAJOR.MINOR.PATCH`.
 - Added the `axis.pictorial-bar` graph type with predefined scaled or repeated
   symbols, horizontal and vertical presentations, package-owned generation,
   and a translated publishable Weekly Visitors example.
+- Added the `axis.scatter` graph type for multi-series scatter and bubble
+  graphs with optional point and axis labels, package-owned generation, and a
+  translated publishable Marketing Reach example.

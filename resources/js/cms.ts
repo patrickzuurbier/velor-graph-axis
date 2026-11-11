@@ -28,6 +28,15 @@ const registrations: GraphRendererRegistration[] = [
             return createPictorialBarGraphRenderer;
         },
     },
+    {
+        type: 'axis.scatter',
+        version: 1,
+        load: async () => {
+            const { createScatterGraphRenderer } = await import('./renderers/scatterGraphRenderer');
+
+            return createScatterGraphRenderer;
+        },
+    },
 ];
 
 window.velorGraphRenderers ??= [];

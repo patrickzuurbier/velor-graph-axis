@@ -15,6 +15,8 @@ use Velor\GraphAxis\Contracts\LineGraphInterface;
 use Velor\GraphAxis\Contracts\LineGraphResultInterface;
 use Velor\GraphAxis\Contracts\PictorialBarGraphInterface;
 use Velor\GraphAxis\Contracts\PictorialBarGraphResultInterface;
+use Velor\GraphAxis\Contracts\ScatterGraphInterface;
+use Velor\GraphAxis\Contracts\ScatterGraphResultInterface;
 
 class GraphAxisPackageTest extends AbstractIntegrationTestCase
 {
@@ -67,6 +69,7 @@ class GraphAxisPackageTest extends AbstractIntegrationTestCase
         $this->assertSame('Logarithmic', $translator->get('velor-graph-axis::graphs.scales.logarithmic'));
         $this->assertSame('Quarterly sales', $translator->get('velor-graph-axis::graphs.quarterly-sales.title'));
         $this->assertSame('Weekly visitors', $translator->get('velor-graph-axis::graphs.weekly-visitors.title'));
+        $this->assertSame('Marketing reach', $translator->get('velor-graph-axis::graphs.marketing-reach.title'));
 
         $translator->setLocale('nl');
         $this->assertSame(
@@ -79,6 +82,7 @@ class GraphAxisPackageTest extends AbstractIntegrationTestCase
             'Wekelijkse bezoekers',
             $translator->get('velor-graph-axis::graphs.weekly-visitors.title'),
         );
+        $this->assertSame('Marketingbereik', $translator->get('velor-graph-axis::graphs.marketing-reach.title'));
     }
 
     /**
@@ -105,6 +109,12 @@ class GraphAxisPackageTest extends AbstractIntegrationTestCase
                 PictorialBarGraphResultInterface::class,
                 'axis.pictorial-bar.stub',
             ],
+            'scatter' => [
+                ScatterGraphInterface::TYPE,
+                ScatterGraphInterface::class,
+                ScatterGraphResultInterface::class,
+                'axis.scatter.stub',
+            ],
         ];
     }
 
@@ -120,6 +130,11 @@ class GraphAxisPackageTest extends AbstractIntegrationTestCase
                 'axis.weekly-visitors-pictorial-bar',
                 'WeeklyVisitorsPictorialBarGraph.php',
                 'WeeklyVisitorsPictorialBarGraph.php',
+            ],
+            'scatter' => [
+                'axis.marketing-reach-scatter',
+                'MarketingReachScatterGraph.php',
+                'MarketingReachScatterGraph.php',
             ],
         ];
     }
