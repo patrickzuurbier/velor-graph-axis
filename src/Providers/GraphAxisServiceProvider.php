@@ -13,6 +13,8 @@ use Velor\GraphAxis\Contracts\BarGraphInterface;
 use Velor\GraphAxis\Contracts\BarGraphResultInterface;
 use Velor\GraphAxis\Contracts\LineGraphInterface;
 use Velor\GraphAxis\Contracts\LineGraphResultInterface;
+use Velor\GraphAxis\Contracts\PictorialBarGraphInterface;
+use Velor\GraphAxis\Contracts\PictorialBarGraphResultInterface;
 
 class GraphAxisServiceProvider extends ServiceProvider
 {
@@ -38,6 +40,13 @@ class GraphAxisServiceProvider extends ServiceProvider
             resultContract: LineGraphResultInterface::class,
             generatorStub: $packagePath . '/stubs/axis.line.stub',
         ));
+        $graphTypes->register(new GraphTypeData(
+            key: PictorialBarGraphInterface::TYPE,
+            version: 1,
+            graphContract: PictorialBarGraphInterface::class,
+            resultContract: PictorialBarGraphResultInterface::class,
+            generatorStub: $packagePath . '/stubs/axis.pictorial-bar.stub',
+        ));
 
         $graphExamples->register(new GraphExampleData(
             key: 'axis.quarterly-sales-bar',
@@ -48,6 +57,11 @@ class GraphAxisServiceProvider extends ServiceProvider
             key: 'axis.rainfall-line',
             source: $packagePath . '/examples/RainfallLineGraph.php',
             target: 'RainfallLineGraph.php',
+        ));
+        $graphExamples->register(new GraphExampleData(
+            key: 'axis.weekly-visitors-pictorial-bar',
+            source: $packagePath . '/examples/WeeklyVisitorsPictorialBarGraph.php',
+            target: 'WeeklyVisitorsPictorialBarGraph.php',
         ));
     }
 }

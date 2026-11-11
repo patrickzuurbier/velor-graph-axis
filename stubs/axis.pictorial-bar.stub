@@ -1,0 +1,34 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use App\Services\Graphs\Contracts\GraphContextInterface;
+use Velor\GraphAxis\AbstractPictorialBarGraph;
+use Velor\GraphAxis\Contracts\PictorialBarGraphResultInterface;
+use Velor\GraphAxis\Data\PictorialBarGraphResultData;
+use Velor\GraphAxis\Data\PictorialBarSeriesData;
+
+class {{ class }} extends AbstractPictorialBarGraph
+{
+    public function key(): string
+    {
+        return '{{ graphKey }}';
+    }
+
+    public function title(): string
+    {
+        return '{{ graphTitle }}';
+    }
+
+    public function result(GraphContextInterface $context): PictorialBarGraphResultInterface
+    {
+        return new PictorialBarGraphResultData(
+            categories: ['Example'],
+            series: [
+                new PictorialBarSeriesData('value', 'Value', [0]),
+            ],
+        );
+    }
+}

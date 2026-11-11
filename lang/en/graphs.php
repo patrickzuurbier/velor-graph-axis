@@ -28,4 +28,9 @@ return [
         'linear'      => 'Linear',
         'logarithmic' => 'Logarithmic',
     ],
+    'weekly-visitors' => [
+        'description' => 'Daily visitor volume shown with repeated symbols.',
+        'title'       => 'Weekly visitors',
+        'visitors'    => 'Visitors',
+    ],
 ];

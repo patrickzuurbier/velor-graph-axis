@@ -1,8 +1,8 @@
 # Velor Graph Axis
 
 Axis graph types for Velor CMS. The package provides renderer-neutral PHP
-contracts and lazy Apache ECharts adapters for line and bar graphs with one or
-multiple series.
+contracts and lazy Apache ECharts adapters for line, bar, and pictorial bar
+graphs with one or multiple series.
 
 ## Requirements
 
@@ -19,8 +19,8 @@ npm run build
 ```
 
 Laravel package discovery registers `GraphAxisServiceProvider`. The provider
-adds the version 1 `axis.line` and `axis.bar` graph types to Velor's graph-type
-registry.
+adds the version 1 `axis.line`, `axis.bar`, and `axis.pictorial-bar` graph types
+to Velor's graph-type registry.
 The package includes its compiled renderer assets; consuming applications do
 not install ECharts or package-specific npm dependencies themselves.
 
@@ -121,6 +121,50 @@ class QuarterlySalesGraph extends AbstractBarGraph
 }
 ```
 
+## Creating A Pictorial Bar Graph
+
+Generate a pictorial bar graph:
+
+```bash
+php artisan velor:make:graph WeeklyVisitorsGraph --type=axis.pictorial-bar
+```
+
+Pictorial bar graphs extend `AbstractPictorialBarGraph`. Select a predefined
+symbol and choose whether it scales as one shape or repeats along the value
+axis:
+
+```php
+use App\Services\Graphs\Contracts\GraphContextInterface;
+use Velor\GraphAxis\Contracts\PictorialBarGraphResultInterface;
+use Velor\GraphAxis\Data\PictorialBarGraphResultData;
+use Velor\GraphAxis\Data\PictorialBarSeriesData;
+use Velor\GraphAxis\Enums\BarOrientationEnum;
+use Velor\GraphAxis\Enums\PictorialBarModeEnum;
+use Velor\GraphAxis\Enums\PictorialBarSymbolEnum;
+
+public function result(GraphContextInterface $context): PictorialBarGraphResultInterface
+{
+    return new PictorialBarGraphResultData(
+        categories: ['Monday', 'Tuesday', 'Wednesday'],
+        series: [
+            new PictorialBarSeriesData(
+                'visitors',
+                'Visitors',
+                [7, 9, 8],
+                symbol: PictorialBarSymbolEnum::CIRCLE,
+                mode: PictorialBarModeEnum::REPEATED,
+            ),
+        ],
+        orientation: BarOrientationEnum::VERTICAL,
+    );
+}
+```
+
+Available symbols are `ARROW`, `CIRCLE`, `DIAMOND`, `PIN`, `RECTANGLE`,
+`ROUNDED_RECTANGLE`, and `TRIANGLE`. `SCALED` renders one shape per value;
+`REPEATED` fills the value with clipped repeated shapes. Pictorial values must be
+non-negative.
+
 ## Optional Description And Controls
 
 Axis graph base classes provide no description and no controls by default.
@@ -220,13 +264,21 @@ raw measurements. Combine percentage mode with a shared stack key for a
 percentage-stacked presentation. A percentage stack cannot exceed `100` within
 one category.
 
+## Pictorial Bar Result Contract
+
+`PictorialBarGraphResultData` contains ordered categories, one or more
+`PictorialBarSeriesData` instances, and a `BarOrientationEnum`. Every series
+contains one non-negative numeric or `null` value per category, a
+`PictorialBarSymbolEnum`, and a `PictorialBarModeEnum`. Series keys remain
+unique lowercase kebab-case identifiers.
+
 ## Renderer Loading
 
-The package registers small `axis.line` and `axis.bar` entrypoints with Velor's
-frontend renderer registry. Each concrete renderer loads asynchronously only
-when its graph type is present. The package build imports ECharts core,
-`LineChart`, `BarChart`, grid, legend, tooltip, and `CanvasRenderer`; each chart
-module remains in its own lazy chunk.
+The package registers small `axis.line`, `axis.bar`, and `axis.pictorial-bar`
+entrypoints with Velor's frontend renderer registry. Each concrete renderer
+loads asynchronously only when its graph type is present. The package build
+imports ECharts core, `LineChart`, `BarChart`, `PictorialBarChart`, grid, legend,
+tooltip, and `CanvasRenderer`; each chart module remains in its own lazy chunk.
 
 The line renderer supports multiple series and recognizes an optional
 client-side `scale` control with `linear` and `logarithmic` values. Server-side
@@ -239,8 +291,9 @@ The package provides:
 - validated multi-series line result DTOs;
 - `BarGraphInterface`, `AbstractBarGraph`, and validated bar result DTOs;
 - vertical, horizontal, grouped, stacked, and percentage bar presentations;
-- automatic registration of `axis.line` and `axis.bar`;
-- lazy multi-series line and bar renderers;
+- pictorial bars with predefined scaled or repeated symbols;
+- automatic registration of `axis.line`, `axis.bar`, and `axis.pictorial-bar`;
+- lazy multi-series line, bar, and pictorial bar renderers;
 - linear and logarithmic presentation scales.
 
 Graph placement and authenticated data endpoints remain core concerns. Custom
@@ -269,6 +322,13 @@ Publish or remove the stacked Quarterly Sales bar example with:
 ```bash
 php artisan velor:graph:example:publish axis.quarterly-sales-bar
 php artisan velor:graph:example:remove axis.quarterly-sales-bar
+```
+
+Publish or remove the repeated-symbol Weekly Visitors example with:
+
+```bash
+php artisan velor:graph:example:publish axis.weekly-visitors-pictorial-bar
+php artisan velor:graph:example:remove axis.weekly-visitors-pictorial-bar
 ```
 
 ## Package Development

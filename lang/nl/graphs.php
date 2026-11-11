@@ -28,4 +28,9 @@ return [
         'linear'      => 'Lineair',
         'logarithmic' => 'Logaritmisch',
     ],
+    'weekly-visitors' => [
+        'description' => 'Dagelijks bezoekersvolume met herhaalde symbolen.',
+        'title'       => 'Wekelijkse bezoekers',
+        'visitors'    => 'Bezoekers',
+    ],
 ];

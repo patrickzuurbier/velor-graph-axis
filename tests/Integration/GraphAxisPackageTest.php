@@ -7,65 +7,55 @@ namespace Velor\GraphAxis\Tests\Integration;
 use App\Services\Graphs\Contracts\GraphExampleRegistryInterface;
 use App\Services\Graphs\Contracts\GraphTypeRegistryInterface;
 use Illuminate\Contracts\Translation\Translator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\AbstractIntegrationTestCase;
 use Velor\GraphAxis\Contracts\BarGraphInterface;
 use Velor\GraphAxis\Contracts\BarGraphResultInterface;
 use Velor\GraphAxis\Contracts\LineGraphInterface;
 use Velor\GraphAxis\Contracts\LineGraphResultInterface;
+use Velor\GraphAxis\Contracts\PictorialBarGraphInterface;
+use Velor\GraphAxis\Contracts\PictorialBarGraphResultInterface;
 
 class GraphAxisPackageTest extends AbstractIntegrationTestCase
 {
-    public function test_package_registers_the_bar_graph_type(): void
-    {
+    /**
+     * @param string $key Registered graph type key.
+     * @param class-string $graphContract Registered graph contract.
+     * @param class-string $resultContract Registered result contract.
+     * @param string $stub Package stub filename.
+     */
+    #[DataProvider('graphTypeProvider')]
+    public function test_package_registers_an_axis_graph_type(
+        string $key,
+        string $graphContract,
+        string $resultContract,
+        string $stub,
+    ): void {
         $graphTypes = $this->app->make(GraphTypeRegistryInterface::class);
-        $bar = $graphTypes->find(BarGraphInterface::TYPE);
+        $type = $graphTypes->find($key);
 
-        $this->assertNotNull($bar);
-        $this->assertSame(1, $bar->version);
-        $this->assertSame(BarGraphInterface::class, $bar->graphContract);
-        $this->assertSame(BarGraphResultInterface::class, $bar->resultContract);
-        $this->assertNotNull($bar->generatorStub);
-        $this->assertFileExists($bar->generatorStub);
-        $this->assertStringEndsWith('/stubs/axis.bar.stub', $bar->generatorStub);
+        $this->assertNotNull($type);
+        $this->assertSame(1, $type->version);
+        $this->assertSame($graphContract, $type->graphContract);
+        $this->assertSame($resultContract, $type->resultContract);
+        $this->assertNotNull($type->generatorStub);
+        $this->assertFileExists($type->generatorStub);
+        $this->assertStringEndsWith('/stubs/' . $stub, $type->generatorStub);
     }
 
-    public function test_package_registers_the_line_graph_type(): void
-    {
-        $graphTypes = $this->app->make(GraphTypeRegistryInterface::class);
-        $line = $graphTypes->find(LineGraphInterface::TYPE);
-
-        $this->assertNotNull($line);
-        $this->assertSame(1, $line->version);
-        $this->assertSame(LineGraphInterface::class, $line->graphContract);
-        $this->assertSame(LineGraphResultInterface::class, $line->resultContract);
-        $this->assertNotNull($line->generatorStub);
-        $this->assertFileExists($line->generatorStub);
-        $this->assertStringEndsWith('/stubs/axis.line.stub', $line->generatorStub);
-    }
-
-    public function test_package_registers_the_rainfall_line_example(): void
+    #[DataProvider('exampleProvider')]
+    public function test_package_registers_an_axis_example(string $key, string $source, string $target): void
     {
         $examples = $this->app->make(GraphExampleRegistryInterface::class);
-        $rainfall = $examples->find('axis.rainfall-line');
+        $example = $examples->find($key);
 
-        $this->assertNotNull($rainfall);
-        $this->assertFileExists($rainfall->source);
-        $this->assertStringEndsWith('/examples/RainfallLineGraph.php', $rainfall->source);
-        $this->assertSame('RainfallLineGraph.php', $rainfall->target);
+        $this->assertNotNull($example);
+        $this->assertFileExists($example->source);
+        $this->assertStringEndsWith('/examples/' . $source, $example->source);
+        $this->assertSame($target, $example->target);
     }
 
-    public function test_package_registers_the_quarterly_sales_bar_example(): void
-    {
-        $examples = $this->app->make(GraphExampleRegistryInterface::class);
-        $sales = $examples->find('axis.quarterly-sales-bar');
-
-        $this->assertNotNull($sales);
-        $this->assertFileExists($sales->source);
-        $this->assertStringEndsWith('/examples/QuarterlySalesBarGraph.php', $sales->source);
-        $this->assertSame('QuarterlySalesBarGraph.php', $sales->target);
-    }
-
-    public function test_package_loads_the_rainfall_translations(): void
+    public function test_package_loads_the_example_translations(): void
     {
         $translator = $this->app->make(Translator::class);
 
@@ -76,6 +66,7 @@ class GraphAxisPackageTest extends AbstractIntegrationTestCase
         );
         $this->assertSame('Logarithmic', $translator->get('velor-graph-axis::graphs.scales.logarithmic'));
         $this->assertSame('Quarterly sales', $translator->get('velor-graph-axis::graphs.quarterly-sales.title'));
+        $this->assertSame('Weekly visitors', $translator->get('velor-graph-axis::graphs.weekly-visitors.title'));
 
         $translator->setLocale('nl');
         $this->assertSame(
@@ -84,5 +75,52 @@ class GraphAxisPackageTest extends AbstractIntegrationTestCase
         );
         $this->assertSame('Logaritmisch', $translator->get('velor-graph-axis::graphs.scales.logarithmic'));
         $this->assertSame('Kwartaalverkoop', $translator->get('velor-graph-axis::graphs.quarterly-sales.title'));
+        $this->assertSame(
+            'Wekelijkse bezoekers',
+            $translator->get('velor-graph-axis::graphs.weekly-visitors.title'),
+        );
+    }
+
+    /**
+     * @return array<string, array{string, class-string, class-string, string}>
+     */
+    public static function graphTypeProvider(): array
+    {
+        return [
+            'bar' => [
+                BarGraphInterface::TYPE,
+                BarGraphInterface::class,
+                BarGraphResultInterface::class,
+                'axis.bar.stub',
+            ],
+            'line' => [
+                LineGraphInterface::TYPE,
+                LineGraphInterface::class,
+                LineGraphResultInterface::class,
+                'axis.line.stub',
+            ],
+            'pictorial bar' => [
+                PictorialBarGraphInterface::TYPE,
+                PictorialBarGraphInterface::class,
+                PictorialBarGraphResultInterface::class,
+                'axis.pictorial-bar.stub',
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string, array{string, string, string}>
+     */
+    public static function exampleProvider(): array
+    {
+        return [
+            'bar'           => ['axis.quarterly-sales-bar', 'QuarterlySalesBarGraph.php', 'QuarterlySalesBarGraph.php'],
+            'line'          => ['axis.rainfall-line', 'RainfallLineGraph.php', 'RainfallLineGraph.php'],
+            'pictorial bar' => [
+                'axis.weekly-visitors-pictorial-bar',
+                'WeeklyVisitorsPictorialBarGraph.php',
+                'WeeklyVisitorsPictorialBarGraph.php',
+            ],
+        ];
     }
 }

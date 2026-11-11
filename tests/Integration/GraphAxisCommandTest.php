@@ -38,47 +38,32 @@ class GraphAxisCommandTest extends AbstractIntegrationTestCase
         parent::tearDown();
     }
 
-    public function test_it_generates_an_application_line_graph(): void
-    {
+    #[DataProvider('graphTypeProvider')]
+    public function test_it_generates_an_application_axis_graph(
+        string $name,
+        string $type,
+        string $baseClass,
+        string $key,
+        string $title,
+    ): void {
         $command = $this->artisan('velor:make:graph', [
-            'name'   => 'MonthlySales',
-            '--type' => 'axis.line',
+            'name'   => $name,
+            '--type' => $type,
         ]);
 
         $this->assertInstanceOf(PendingCommand::class, $command);
         $command->assertExitCode(Command::SUCCESS)->run();
 
-        $path = $this->temporaryBasePath . '/app/Graphs/MonthlySalesGraph.php';
+        $class = str_ends_with($name, 'Graph') ? $name : $name . 'Graph';
+        $path = $this->temporaryBasePath . '/app/Graphs/' . $class . '.php';
 
         $this->assertTrue($this->files->exists($path));
 
         $content = $this->files->get($path);
 
-        $this->assertStringContainsString('class MonthlySalesGraph extends AbstractLineGraph', $content);
-        $this->assertStringContainsString("return 'monthly-sales';", $content);
-        $this->assertStringContainsString("return 'Monthly Sales';", $content);
-        $this->assertNotEmpty(token_get_all($content, TOKEN_PARSE));
-    }
-
-    public function test_it_generates_an_application_bar_graph(): void
-    {
-        $command = $this->artisan('velor:make:graph', [
-            'name'   => 'QuarterlySales',
-            '--type' => 'axis.bar',
-        ]);
-
-        $this->assertInstanceOf(PendingCommand::class, $command);
-        $command->assertExitCode(Command::SUCCESS)->run();
-
-        $path = $this->temporaryBasePath . '/app/Graphs/QuarterlySalesGraph.php';
-
-        $this->assertTrue($this->files->exists($path));
-
-        $content = $this->files->get($path);
-
-        $this->assertStringContainsString('class QuarterlySalesGraph extends AbstractBarGraph', $content);
-        $this->assertStringContainsString("return 'quarterly-sales';", $content);
-        $this->assertStringContainsString("return 'Quarterly Sales';", $content);
+        $this->assertStringContainsString("class {$class} extends {$baseClass}", $content);
+        $this->assertStringContainsString("return '{$key}';", $content);
+        $this->assertStringContainsString("return '{$title}';", $content);
         $this->assertNotEmpty(token_get_all($content, TOKEN_PARSE));
     }
 
@@ -113,8 +98,30 @@ class GraphAxisCommandTest extends AbstractIntegrationTestCase
     public static function exampleProvider(): array
     {
         return [
-            'line' => ['axis.rainfall-line', 'RainfallLineGraph.php'],
-            'bar'  => ['axis.quarterly-sales-bar', 'QuarterlySalesBarGraph.php'],
+            'line'          => ['axis.rainfall-line', 'RainfallLineGraph.php'],
+            'bar'           => ['axis.quarterly-sales-bar', 'QuarterlySalesBarGraph.php'],
+            'pictorial bar' => [
+                'axis.weekly-visitors-pictorial-bar',
+                'WeeklyVisitorsPictorialBarGraph.php',
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string, array{string, string, string, string, string}>
+     */
+    public static function graphTypeProvider(): array
+    {
+        return [
+            'line'          => ['MonthlySales', 'axis.line', 'AbstractLineGraph', 'monthly-sales', 'Monthly Sales'],
+            'bar'           => ['QuarterlySales', 'axis.bar', 'AbstractBarGraph', 'quarterly-sales', 'Quarterly Sales'],
+            'pictorial bar' => [
+                'WeeklyVisitors',
+                'axis.pictorial-bar',
+                'AbstractPictorialBarGraph',
+                'weekly-visitors',
+                'Weekly Visitors',
+            ],
         ];
     }
 }

@@ -17,3 +17,6 @@ This project follows semantic versioning: `MAJOR.MINOR.PATCH`.
 - Added the `axis.bar` graph type with vertical, horizontal, grouped, stacked,
   and percentage presentations, a lazy renderer, package-owned generation, and
   a translated publishable Quarterly Sales example.
+- Added the `axis.pictorial-bar` graph type with predefined scaled or repeated
+  symbols, horizontal and vertical presentations, package-owned generation,
+  and a translated publishable Weekly Visitors example.

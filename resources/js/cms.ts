@@ -19,6 +19,15 @@ const registrations: GraphRendererRegistration[] = [
             return createLineGraphRenderer;
         },
     },
+    {
+        type: 'axis.pictorial-bar',
+        version: 1,
+        load: async () => {
+            const { createPictorialBarGraphRenderer } = await import('./renderers/pictorialBarGraphRenderer');
+
+            return createPictorialBarGraphRenderer;
+        },
+    },
 ];
 
 window.velorGraphRenderers ??= [];

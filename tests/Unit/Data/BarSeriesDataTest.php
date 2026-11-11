@@ -12,7 +12,11 @@ use Velor\GraphAxis\Data\BarSeriesData;
 class BarSeriesDataTest extends TestCase
 {
     /**
+     * @param string $key Series key under test.
+     * @param string $label Series label under test.
      * @param array<int, mixed> $values
+     * @param string|null $stack Stack key under test.
+     * @param string $message Expected validation message.
      */
     #[DataProvider('invalidSeriesProvider')]
     public function test_it_rejects_invalid_series(
