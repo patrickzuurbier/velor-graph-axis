@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Velor\GraphAxis\Examples;
+namespace App\Graphs;
 
 use App\Services\Graphs\Contracts\GraphContextInterface;
 use App\Services\Graphs\Data\GraphControlData;

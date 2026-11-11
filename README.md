@@ -25,8 +25,15 @@ not install ECharts or package-specific npm dependencies themselves.
 
 ## Creating A Line Graph
 
-Application graphs live below `app/Graphs`. Extend `AbstractLineGraph` to reuse
-the common `axis.line` type while retaining full control over data access:
+Generate a line graph:
+
+```bash
+php artisan velor:make:graph MonthlySalesGraph --type=axis.line
+```
+
+The command creates `app/Graphs/MonthlySalesGraph.php` with its stable key,
+title, line result contract, and an initial series. Line graphs extend
+`AbstractLineGraph` and define their data through the result method:
 
 ```php
 namespace App\Graphs;
@@ -65,6 +72,58 @@ class MonthlySalesGraph extends AbstractLineGraph
 A graph may use constructor-injected repositories or services, Eloquent,
 Laravel's query builder, an external API, or another suitable data source. The
 package constrains the returned result, not how values are calculated.
+
+## Optional Description And Controls
+
+`AbstractLineGraph` provides no description and no controls by default. Override
+`description()` to show supporting text below the graph title:
+
+```php
+public function description(): ?string
+{
+    return 'Monthly revenue and costs.';
+}
+```
+
+Override `controls()` to declare selectable options:
+
+```php
+use App\Services\Graphs\Data\GraphControlData;
+use App\Services\Graphs\Data\GraphControlOptionData;
+use App\Services\Graphs\Enums\GraphControlModeEnum;
+
+public function controls(): array
+{
+    return [
+        new GraphControlData(
+            key: 'period',
+            label: 'Period',
+            options: [
+                new GraphControlOptionData('month', 'Month'),
+                new GraphControlOptionData('year', 'Year'),
+            ],
+            defaultValue: 'month',
+            mode: GraphControlModeEnum::SERVER,
+        ),
+        new GraphControlData(
+            key: 'scale',
+            label: 'Scale',
+            options: [
+                new GraphControlOptionData('linear', 'Linear'),
+                new GraphControlOptionData('logarithmic', 'Logarithmic'),
+            ],
+            defaultValue: 'linear',
+            mode: GraphControlModeEnum::CLIENT,
+        ),
+    ];
+}
+```
+
+`SERVER` controls refresh only the affected graph and are available in
+`result()` through `$context->control('period')`. `CLIENT` controls reuse the
+current result and change only its presentation. The line renderer supports
+`scale` as a client control with `linear` and `logarithmic` values. See the
+publishable Rainfall example for a complete implementation.
 
 ## Result Contract
 
@@ -121,11 +180,21 @@ graph classes only declare controls and return the package result contract.
 
 ## Example Graph
 
-`Velor\GraphAxis\Examples\RainfallLineGraph` provides static multi-series data
-for renderer validation and future example publishing. The package does not
-register or place this class. A published copy below `app/Graphs` behaves like
-every other application graph and remains available until the developer removes
-the class and its dashboard or resource placements.
+Publish the translated, multi-series Rainfall example into `app/Graphs` with:
+
+```bash
+php artisan velor:graph:example:publish axis.rainfall-line
+```
+
+The published class behaves like every other application graph and is not
+placed automatically. After removing its dashboard or resource placements,
+remove an unchanged published copy with:
+
+```bash
+php artisan velor:graph:example:remove axis.rainfall-line
+```
+
+The removal command preserves a modified copy.
 
 ## Package Development
 
@@ -133,6 +202,7 @@ Install and compile the package-owned frontend dependencies with:
 
 ```bash
 npm ci
+npm test
 npm run typecheck
 npm run build
 ```

@@ -6,6 +6,7 @@
     "scripts": {
         "build": "vite build && npm run licenses",
         "licenses": "node scripts/syncThirdPartyLicenses.mjs",
+        "test": "node --test tests/Frontend/*.test.mjs",
         "typecheck": "tsc --noEmit"
     },
     "devDependencies": {

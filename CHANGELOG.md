@@ -12,5 +12,5 @@ This project follows semantic versioning: `MAJOR.MINOR.PATCH`.
   graph, and validated renderer-neutral result DTOs for one or multiple series.
 - Added a lazy, package-owned Apache ECharts renderer for multi-series line
   graphs with linear and logarithmic presentation scales.
-- Added a translated rainfall example graph as package-owned source for later
-  publication into application graph directories.
+- Added package-owned `axis.line` generation and a translated Rainfall example
+  with safe publication and removal through the Velor CMS graph commands.

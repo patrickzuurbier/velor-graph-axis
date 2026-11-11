@@ -5,4 +5,5 @@ package installed through the local package integration workflow.
 
 The unit suite covers package contracts and data validation. The integration
 suite boots the host application and verifies that Laravel package discovery
-registers the package's graph types in the real core registry.
+registers the package's graph types in the real core registry. The frontend
+suite covers renderer data validation and option mapping without booting a DOM.

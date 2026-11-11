@@ -21876,14 +21876,34 @@ var ya = 1, oh = 2, F0 = 4, Bo = ya | F0, WI = (function() {
 function YI(t) {
   t.registerPainter("canvas", WI);
 }
+function XI(t) {
+  if (typeof t != "object" || t === null || !("categories" in t) || !("series" in t))
+    return !1;
+  const e = t.categories, r = t.series;
+  return !Array.isArray(e) || !e.every((n) => typeof n == "string") ? !1 : Array.isArray(r) && r.every((n) => typeof n != "object" || n === null || !("key" in n) || typeof n.key != "string" || !("label" in n) || typeof n.label != "string" || !("values" in n) || !Array.isArray(n.values) ? !1 : n.values.every((i) => typeof i == "number" || i === null) && n.values.length === e.length);
+}
+function ZI(t) {
+  return t.map((e) => ({
+    type: "line",
+    id: e.key,
+    name: e.label,
+    data: e.values,
+    showSymbol: !1,
+    smooth: !0,
+    emphasis: { focus: "series" }
+  }));
+}
+function $I(t) {
+  return t.scale === "logarithmic" ? "log" : "value";
+}
 Fr([PD, sI, VI, EI, YI]);
-class XI {
+class qI {
   constructor(e) {
     Ec(this, "chart");
     this.chart = XA(e, void 0, { renderer: "canvas" });
   }
   render(e, r) {
-    if (!ZI(e))
+    if (!XI(e))
       throw new Error("The line graph data is invalid.");
     const n = getComputedStyle(document.documentElement), i = n.getPropertyValue("--bs-body-color").trim() || "#212529", a = n.getPropertyValue("--cms-border").trim() || "#dee2e6", o = n.getPropertyValue("--cms-surface").trim() || "#ffffff", s = {
       animationDuration: 350,
@@ -21913,19 +21933,11 @@ class XI {
         axisLine: { lineStyle: { color: a } }
       },
       yAxis: {
-        type: r.scale === "logarithmic" ? "log" : "value",
+        type: $I(r),
         axisLabel: { color: i },
         splitLine: { lineStyle: { color: a } }
       },
-      series: e.series.map((u) => ({
-        type: "line",
-        id: u.key,
-        name: u.label,
-        data: u.values,
-        showSymbol: !1,
-        smooth: !0,
-        emphasis: { focus: "series" }
-      }))
+      series: ZI(e.series)
     };
     this.chart.setOption(s, !0);
   }
@@ -21936,13 +21948,7 @@ class XI {
     this.chart.dispose();
   }
 }
-const qI = (t) => new XI(t);
-function ZI(t) {
-  if (typeof t != "object" || t === null || !("categories" in t) || !("series" in t))
-    return !1;
-  const e = t.categories, r = t.series;
-  return !Array.isArray(e) || !e.every((n) => typeof n == "string") ? !1 : Array.isArray(r) && r.every((n) => typeof n != "object" || n === null || !("key" in n) || typeof n.key != "string" || !("label" in n) || typeof n.label != "string" || !("values" in n) || !Array.isArray(n.values) ? !1 : n.values.every((i) => typeof i == "number" || i === null) && n.values.length === e.length);
-}
+const QI = (t) => new qI(t);
 export {
-  qI as createLineGraphRenderer
+  QI as createLineGraphRenderer
 };

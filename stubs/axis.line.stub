@@ -1,0 +1,34 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use App\Services\Graphs\Contracts\GraphContextInterface;
+use Velor\GraphAxis\AbstractLineGraph;
+use Velor\GraphAxis\Contracts\LineGraphResultInterface;
+use Velor\GraphAxis\Data\LineGraphResultData;
+use Velor\GraphAxis\Data\LineSeriesData;
+
+class {{ class }} extends AbstractLineGraph
+{
+    public function key(): string
+    {
+        return '{{ graphKey }}';
+    }
+
+    public function title(): string
+    {
+        return '{{ graphTitle }}';
+    }
+
+    public function result(GraphContextInterface $context): LineGraphResultInterface
+    {
+        return new LineGraphResultData(
+            categories: ['Example'],
+            series: [
+                new LineSeriesData('value', 'Value', [0]),
+            ],
+        );
+    }
+}
