@@ -13,6 +13,8 @@ use Velor\GraphAxis\Contracts\BarGraphInterface;
 use Velor\GraphAxis\Contracts\BarGraphResultInterface;
 use Velor\GraphAxis\Contracts\LineGraphInterface;
 use Velor\GraphAxis\Contracts\LineGraphResultInterface;
+use Velor\GraphAxis\Contracts\MixedGraphInterface;
+use Velor\GraphAxis\Contracts\MixedGraphResultInterface;
 use Velor\GraphAxis\Contracts\PictorialBarGraphInterface;
 use Velor\GraphAxis\Contracts\PictorialBarGraphResultInterface;
 use Velor\GraphAxis\Contracts\ScatterGraphInterface;
@@ -43,6 +45,13 @@ class GraphAxisServiceProvider extends ServiceProvider
             generatorStub: $packagePath . '/stubs/axis.line.stub',
         ));
         $graphTypes->register(new GraphTypeData(
+            key: MixedGraphInterface::TYPE,
+            version: 1,
+            graphContract: MixedGraphInterface::class,
+            resultContract: MixedGraphResultInterface::class,
+            generatorStub: $packagePath . '/stubs/axis.mixed.stub',
+        ));
+        $graphTypes->register(new GraphTypeData(
             key: PictorialBarGraphInterface::TYPE,
             version: 1,
             graphContract: PictorialBarGraphInterface::class,
@@ -66,6 +75,11 @@ class GraphAxisServiceProvider extends ServiceProvider
             key: 'axis.rainfall-line',
             source: $packagePath . '/examples/RainfallLineGraph.php',
             target: 'RainfallLineGraph.php',
+        ));
+        $graphExamples->register(new GraphExampleData(
+            key: 'axis.monthly-performance-mixed',
+            source: $packagePath . '/examples/MonthlyPerformanceMixedGraph.php',
+            target: 'MonthlyPerformanceMixedGraph.php',
         ));
         $graphExamples->register(new GraphExampleData(
             key: 'axis.weekly-visitors-pictorial-bar',

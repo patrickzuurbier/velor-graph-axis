@@ -99,6 +99,7 @@ class GraphAxisCommandTest extends AbstractIntegrationTestCase
     {
         return [
             'line'          => ['axis.rainfall-line', 'RainfallLineGraph.php'],
+            'mixed'         => ['axis.monthly-performance-mixed', 'MonthlyPerformanceMixedGraph.php'],
             'bar'           => ['axis.quarterly-sales-bar', 'QuarterlySalesBarGraph.php'],
             'pictorial bar' => [
                 'axis.weekly-visitors-pictorial-bar',
@@ -114,7 +115,14 @@ class GraphAxisCommandTest extends AbstractIntegrationTestCase
     public static function graphTypeProvider(): array
     {
         return [
-            'line'          => ['MonthlySales', 'axis.line', 'AbstractLineGraph', 'monthly-sales', 'Monthly Sales'],
+            'line'  => ['MonthlySales', 'axis.line', 'AbstractLineGraph', 'monthly-sales', 'Monthly Sales'],
+            'mixed' => [
+                'MonthlyPerformance',
+                'axis.mixed',
+                'AbstractMixedGraph',
+                'monthly-performance',
+                'Monthly Performance',
+            ],
             'bar'           => ['QuarterlySales', 'axis.bar', 'AbstractBarGraph', 'quarterly-sales', 'Quarterly Sales'],
             'pictorial bar' => [
                 'WeeklyVisitors',

@@ -13,6 +13,8 @@ use Velor\GraphAxis\Contracts\BarGraphInterface;
 use Velor\GraphAxis\Contracts\BarGraphResultInterface;
 use Velor\GraphAxis\Contracts\LineGraphInterface;
 use Velor\GraphAxis\Contracts\LineGraphResultInterface;
+use Velor\GraphAxis\Contracts\MixedGraphInterface;
+use Velor\GraphAxis\Contracts\MixedGraphResultInterface;
 use Velor\GraphAxis\Contracts\PictorialBarGraphInterface;
 use Velor\GraphAxis\Contracts\PictorialBarGraphResultInterface;
 use Velor\GraphAxis\Contracts\ScatterGraphInterface;
@@ -70,6 +72,7 @@ class GraphAxisPackageTest extends AbstractIntegrationTestCase
         $this->assertSame('Quarterly sales', $translator->get('velor-graph-axis::graphs.quarterly-sales.title'));
         $this->assertSame('Weekly visitors', $translator->get('velor-graph-axis::graphs.weekly-visitors.title'));
         $this->assertSame('Marketing reach', $translator->get('velor-graph-axis::graphs.marketing-reach.title'));
+        $this->assertSame('Monthly performance', $translator->get('velor-graph-axis::graphs.monthly-performance.title'));
 
         $translator->setLocale('nl');
         $this->assertSame(
@@ -83,6 +86,7 @@ class GraphAxisPackageTest extends AbstractIntegrationTestCase
             $translator->get('velor-graph-axis::graphs.weekly-visitors.title'),
         );
         $this->assertSame('Marketingbereik', $translator->get('velor-graph-axis::graphs.marketing-reach.title'));
+        $this->assertSame('Maandprestaties', $translator->get('velor-graph-axis::graphs.monthly-performance.title'));
     }
 
     /**
@@ -102,6 +106,12 @@ class GraphAxisPackageTest extends AbstractIntegrationTestCase
                 LineGraphInterface::class,
                 LineGraphResultInterface::class,
                 'axis.line.stub',
+            ],
+            'mixed' => [
+                MixedGraphInterface::TYPE,
+                MixedGraphInterface::class,
+                MixedGraphResultInterface::class,
+                'axis.mixed.stub',
             ],
             'pictorial bar' => [
                 PictorialBarGraphInterface::TYPE,
@@ -124,8 +134,13 @@ class GraphAxisPackageTest extends AbstractIntegrationTestCase
     public static function exampleProvider(): array
     {
         return [
-            'bar'           => ['axis.quarterly-sales-bar', 'QuarterlySalesBarGraph.php', 'QuarterlySalesBarGraph.php'],
-            'line'          => ['axis.rainfall-line', 'RainfallLineGraph.php', 'RainfallLineGraph.php'],
+            'bar'   => ['axis.quarterly-sales-bar', 'QuarterlySalesBarGraph.php', 'QuarterlySalesBarGraph.php'],
+            'line'  => ['axis.rainfall-line', 'RainfallLineGraph.php', 'RainfallLineGraph.php'],
+            'mixed' => [
+                'axis.monthly-performance-mixed',
+                'MonthlyPerformanceMixedGraph.php',
+                'MonthlyPerformanceMixedGraph.php',
+            ],
             'pictorial bar' => [
                 'axis.weekly-visitors-pictorial-bar',
                 'WeeklyVisitorsPictorialBarGraph.php',

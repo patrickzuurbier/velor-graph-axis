@@ -20,6 +20,15 @@ const registrations: GraphRendererRegistration[] = [
         },
     },
     {
+        type: 'axis.mixed',
+        version: 1,
+        load: async () => {
+            const { createMixedGraphRenderer } = await import('./renderers/mixedGraphRenderer');
+
+            return createMixedGraphRenderer;
+        },
+    },
+    {
         type: 'axis.pictorial-bar',
         version: 1,
         load: async () => {

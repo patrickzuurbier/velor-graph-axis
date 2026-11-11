@@ -1,4 +1,4 @@
-import { aa as d, $ as D } from "./installCanvasRenderer-CJsrED7t.js";
+import { aa as d, $ as D } from "./installCanvasRenderer-nrYOY0X5.js";
 /*! Third-party licenses: see THIRD_PARTY_NOTICES.md and licenses/ in the Composer package. */
 function S(t, n) {
   return t.type === n;

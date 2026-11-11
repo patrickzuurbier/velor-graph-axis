@@ -20,6 +20,15 @@ return [
         'social'      => 'Social',
         'title'       => 'Marketing reach',
     ],
+    'monthly-performance' => [
+        'conversion'         => 'Conversion',
+        'conversion-axis'    => 'Conversion (%)',
+        'description'        => 'Monthly visitor volume compared with conversion percentage.',
+        'new-visitors'       => 'New visitors',
+        'returning-visitors' => 'Returning visitors',
+        'title'              => 'Monthly performance',
+        'visitors'           => 'Visitors',
+    ],
     'quarterly-sales' => [
         'description' => 'Quarterly online and retail sales shown as stacked bars.',
         'online'      => 'Online',

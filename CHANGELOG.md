@@ -23,3 +23,6 @@ This project follows semantic versioning: `MAJOR.MINOR.PATCH`.
 - Added the `axis.scatter` graph type for multi-series scatter and bubble
   graphs with optional point and axis labels, package-owned generation, and a
   translated publishable Marketing Reach example.
+- Added the `axis.mixed` graph type for combined line and bar series with
+  optional bar stacking, primary and secondary value axes, package-owned
+  generation, and a translated publishable Monthly Performance example.

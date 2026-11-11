@@ -1,8 +1,8 @@
 var x = Object.defineProperty;
 var _ = (a, e, t) => e in a ? x(a, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : a[e] = t;
 var m = (a, e, t) => _(a, typeof e != "symbol" ? e + "" : e, t);
-import { _ as y, c as D, t as w, M as L, G as C, aL as A, P as I, aM as z, L as P, j as R, A as M, C as T, aN as V, F as g, aO as N, E as O, H as B, I as G, J as U, K as $ } from "./installCanvasRenderer-CJsrED7t.js";
-import { p as S, S as j } from "./points-CEhG5zM5.js";
+import { _ as y, e as D, t as w, M as L, G as C, aL as A, P as I, aM as z, L as P, x as R, I as M, C as T, aN as V, u as g, aO as N, i as O, a as B, b as G, c as U, d as $ } from "./installCanvasRenderer-nrYOY0X5.js";
+import { p as S, S as j } from "./points-6m8fT05o.js";
 /*! Third-party licenses: see THIRD_PARTY_NOTICES.md and licenses/ in the Composer package. */
 var H = (
   /** @class */
@@ -55,14 +55,14 @@ var H = (
       // progressive: null
     }, e;
   })(L)
-), b = 4, F = (
+), b = 4, k = (
   /** @class */
   /* @__PURE__ */ (function() {
     function a() {
     }
     return a;
   })()
-), k = (
+), F = (
   /** @class */
   (function(a) {
     y(e, a);
@@ -71,7 +71,7 @@ var H = (
       return r._off = 0, r.hoverDataIdx = -1, r;
     }
     return e.prototype.getDefaultShape = function() {
-      return new F();
+      return new k();
     }, e.prototype.reset = function() {
       this.notClear = !1, this._off = 0;
     }, e.prototype.beforeBrush = function(t) {
@@ -122,7 +122,7 @@ var H = (
       return t;
     }, e;
   })(I)
-), K = (
+), Z = (
   /** @class */
   (function() {
     function a() {
@@ -165,7 +165,7 @@ var H = (
     }, a.prototype.eachRendered = function(e) {
       this._newAdded[0] && e(this._newAdded[0]);
     }, a.prototype._create = function() {
-      var e = new k({
+      var e = new F({
         cursor: "default"
       });
       return e.ignoreCoarsePointer = !0, this.group.add(e), this._newAdded.push(e), e;
@@ -193,7 +193,7 @@ var H = (
       this._newAdded = [], this.group.removeAll();
     }, a;
   })()
-), Z = (
+), K = (
   /** @class */
   (function(a) {
     y(e, a);
@@ -226,7 +226,7 @@ var H = (
       this._symbolDraw && this._symbolDraw.eachRendered(t);
     }, e.prototype._updateSymbolDraw = function(t, r) {
       var o = this._symbolDraw, i = r.pipelineContext, n = i.large;
-      return (!o || n !== this._isLargeDraw) && (o && o.remove(), o = this._symbolDraw = n ? new K() : new j(), this._isLargeDraw = n, this.group.removeAll()), this.group.add(o.group), o;
+      return (!o || n !== this._isLargeDraw) && (o && o.remove(), o = this._symbolDraw = n ? new Z() : new j(), this._isLargeDraw = n, this.group.removeAll()), this.group.add(o.group), o;
     }, e.prototype.remove = function(t, r) {
       this._symbolDraw && this._symbolDraw.remove(!0), this._symbolDraw = null;
     }, e.prototype.dispose = function() {
@@ -242,10 +242,10 @@ function d(a) {
     clipShape: V(a)
   };
 }
-function J(a) {
-  g(N), a.registerSeriesModel(H), a.registerChartView(Z), a.registerLayout(S("scatter"));
-}
 function q(a) {
+  g(N), a.registerSeriesModel(H), a.registerChartView(K), a.registerLayout(S("scatter"));
+}
+function J(a) {
   return typeof a != "object" || a === null || !("series" in a) || !("xAxisLabel" in a) || !("yAxisLabel" in a) || a.xAxisLabel !== null && typeof a.xAxisLabel != "string" || a.yAxisLabel !== null && typeof a.yAxisLabel != "string" ? !1 : Array.isArray(a.series) && a.series.every((e) => typeof e != "object" || e === null || !("key" in e) || typeof e.key != "string" || !("label" in e) || typeof e.label != "string" || !("points" in e) || !Array.isArray(e.points) ? !1 : e.points.every((t) => typeof t == "object" && t !== null && "x" in t && typeof t.x == "number" && "y" in t && typeof t.y == "number" && "size" in t && (t.size === null || typeof t.size == "number" && t.size >= 0) && "label" in t && (t.label === null || typeof t.label == "string")));
 }
 function Q(a) {
@@ -275,14 +275,14 @@ function E(a) {
     emphasis: { focus: "series" }
   }));
 }
-g([J, B, G, U, $]);
+g([q, B, G, U, $]);
 class X {
   constructor(e) {
     m(this, "chart");
     this.chart = O(e, void 0, { renderer: "canvas" });
   }
   render(e) {
-    if (!q(e))
+    if (!J(e))
       throw new Error("The scatter graph data is invalid.");
     const t = getComputedStyle(document.documentElement), r = t.getPropertyValue("--bs-body-color").trim() || "#212529", o = t.getPropertyValue("--cms-border").trim() || "#dee2e6", i = t.getPropertyValue("--cms-surface").trim() || "#ffffff", n = {
       animationDuration: 350,

@@ -1,8 +1,8 @@
 # Velor Graph Axis
 
 Axis graph types for Velor CMS. The package provides renderer-neutral PHP
-contracts and lazy Apache ECharts adapters for line, bar, pictorial bar, and
-scatter graphs with one or multiple series.
+contracts and lazy Apache ECharts adapters for line, bar, pictorial bar,
+scatter, and mixed line/bar graphs with one or multiple series.
 
 ## Requirements
 
@@ -19,8 +19,8 @@ npm run build
 ```
 
 Laravel package discovery registers `GraphAxisServiceProvider`. The provider
-adds the version 1 `axis.line`, `axis.bar`, `axis.pictorial-bar`, and
-`axis.scatter` graph types to Velor's graph-type registry.
+adds the version 1 `axis.line`, `axis.bar`, `axis.pictorial-bar`, `axis.scatter`,
+and `axis.mixed` graph types to Velor's graph-type registry.
 The package includes its compiled renderer assets; consuming applications do
 not install ECharts or package-specific npm dependencies themselves.
 
@@ -207,6 +207,55 @@ Bubble sizes are compared across every series in the result and mapped to a
 consistent visual range. Points without a size use the regular scatter marker.
 Axis labels are optional.
 
+## Creating A Mixed Graph
+
+Generate a mixed line/bar graph:
+
+```bash
+php artisan velor:make:graph MonthlyPerformanceGraph --type=axis.mixed
+```
+
+Mixed graphs extend `AbstractMixedGraph`. Every series selects `LINE` or `BAR`
+and may use the primary or secondary value axis. Bar series may additionally
+share a stack key:
+
+```php
+use App\Services\Graphs\Contracts\GraphContextInterface;
+use Velor\GraphAxis\Contracts\MixedGraphResultInterface;
+use Velor\GraphAxis\Data\MixedGraphResultData;
+use Velor\GraphAxis\Data\MixedSeriesData;
+use Velor\GraphAxis\Enums\MixedSeriesTypeEnum;
+use Velor\GraphAxis\Enums\MixedValueAxisEnum;
+
+public function result(GraphContextInterface $context): MixedGraphResultInterface
+{
+    return new MixedGraphResultData(
+        categories: ['January', 'February', 'March'],
+        series: [
+            new MixedSeriesData(
+                'visitors',
+                'Visitors',
+                [1200, 1450, 1600],
+                MixedSeriesTypeEnum::BAR,
+            ),
+            new MixedSeriesData(
+                'conversion',
+                'Conversion',
+                [3.2, 3.8, 4.1],
+                MixedSeriesTypeEnum::LINE,
+                MixedValueAxisEnum::SECONDARY,
+            ),
+        ],
+        primaryAxisLabel: 'Visitors',
+        secondaryAxisLabel: 'Conversion (%)',
+    );
+}
+```
+
+The secondary axis is rendered only when at least one series uses it. Axis
+labels are optional. Stack keys use lowercase kebab-case and apply only to bar
+series.
+
 ## Optional Description And Controls
 
 Axis graph base classes provide no description and no controls by default.
@@ -323,14 +372,24 @@ optional non-negative bubble value, and an optional non-empty point label. A
 plain scatter graph omits point sizes; a bubble graph supplies them. Both use
 the same `axis.scatter` type and lazy chart module.
 
+## Mixed Result Contract
+
+`MixedGraphResultData` contains ordered categories, one or more uniquely keyed
+`MixedSeriesData` instances, and optional labels for the primary and secondary
+value axes. Every series contains one numeric or `null` value per category,
+selects `MixedSeriesTypeEnum::LINE` or `MixedSeriesTypeEnum::BAR`, and selects
+its value axis with `MixedValueAxisEnum`. Bar series sharing a stack key are
+stacked; line series cannot declare a stack.
+
 ## Renderer Loading
 
-The package registers small `axis.line`, `axis.bar`, `axis.pictorial-bar`, and
-`axis.scatter` entrypoints with Velor's frontend renderer registry. Each
-concrete renderer loads asynchronously only when its graph type is present. The
-package build imports ECharts core, `LineChart`, `BarChart`,
+The package registers small `axis.line`, `axis.bar`, `axis.pictorial-bar`,
+`axis.scatter`, and `axis.mixed` entrypoints with Velor's frontend renderer
+registry. Each concrete renderer loads asynchronously only when its graph type
+is present. The package build imports ECharts core, `LineChart`, `BarChart`,
 `PictorialBarChart`, `ScatterChart`, grid, legend, tooltip, and
-`CanvasRenderer`; each chart module remains in its own lazy chunk.
+`CanvasRenderer`; each graph renderer remains in its own lazy chunk. The mixed
+renderer loads both line and bar chart modules because it uses both.
 
 The line renderer supports multiple series and recognizes an optional
 client-side `scale` control with `linear` and `logarithmic` values. Server-side
@@ -346,9 +405,11 @@ The package provides:
 - pictorial bars with predefined scaled or repeated symbols;
 - scatter and bubble graphs with multiple series, optional point labels, and
   optional axis labels;
-- automatic registration of `axis.line`, `axis.bar`, `axis.pictorial-bar`, and
-  `axis.scatter`;
-- lazy multi-series line, bar, pictorial bar, and scatter renderers;
+- mixed line/bar graphs with optional bar stacking and primary or secondary
+  value axes;
+- automatic registration of `axis.line`, `axis.bar`, `axis.pictorial-bar`,
+  `axis.scatter`, and `axis.mixed`;
+- lazy multi-series line, bar, pictorial bar, scatter, and mixed renderers;
 - linear and logarithmic presentation scales.
 
 Graph placement and authenticated data endpoints remain core concerns. Custom
@@ -391,6 +452,13 @@ Publish or remove the multi-series Marketing Reach bubble example with:
 ```bash
 php artisan velor:graph:example:publish axis.marketing-reach-scatter
 php artisan velor:graph:example:remove axis.marketing-reach-scatter
+```
+
+Publish or remove the stacked visitor bars and conversion line example with:
+
+```bash
+php artisan velor:graph:example:publish axis.monthly-performance-mixed
+php artisan velor:graph:example:remove axis.monthly-performance-mixed
 ```
 
 ## Package Development

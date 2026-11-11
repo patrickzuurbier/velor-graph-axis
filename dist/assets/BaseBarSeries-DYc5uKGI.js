@@ -1,4 +1,4 @@
-import { aj as ra, ak as ea, al as na, am as X, an as ia, ao as sa, ap as q, aq as oa, ar as ua, as as va, at as la, au as fa, av as ca, aw as J, ax as Q, ay as da, az as ga, aA as ma, N as ha, O as U, aB as pa, aC as Sa, aD as ya, aE as Z, aF as K, aG as Ia, ad as R, z as P, aH as ba, aI as Y, aJ as C, aK as N, _ as Aa, c as xa, M as $ } from "./installCanvasRenderer-CJsrED7t.js";
+import { aj as ra, ak as ea, al as na, am as X, an as ia, ao as sa, ap as q, aq as oa, ar as ua, as as va, at as la, au as fa, av as ca, aw as J, ax as Q, ay as da, az as ga, aA as ma, N as ha, O as U, aB as pa, aC as Sa, aD as ya, aE as Z, aF as K, aG as Ia, ad as R, H as P, aH as ba, aI as Y, aJ as H, aK as N, _ as Aa, e as xa, M as $ } from "./installCanvasRenderer-nrYOY0X5.js";
 /*! Third-party licenses: see THIRD_PARTY_NOTICES.md and licenses/ in the Composer package. */
 function Da() {
   ra("liPosMinGap", _a);
@@ -56,7 +56,7 @@ function Ga(r) {
       return [-e.w2 / 2, e.w2 / 2];
   };
 }
-function H(r, t) {
+function C(r, t) {
   return r + fa + t;
 }
 function La(r) {
@@ -65,7 +65,7 @@ function La(r) {
     liPosMinGap: !ca(r.scale)
   };
 }
-var ka = "bar", Ca = "pictorialBar";
+var ka = "bar", Ha = "pictorialBar";
 function wa(r, t, a, e) {
   da(r, {
     key: t,
@@ -87,7 +87,7 @@ function Wa(r, t) {
   return a.columnMap = Pa(a), a;
 }
 function Ea(r, t) {
-  var a = H(t, N), e = [], f = J(r, {
+  var a = C(t, N), e = [], f = J(r, {
     fromStat: {
       key: a
     },
@@ -134,18 +134,18 @@ function Pa(r) {
     m != null && (i = m);
     var y = o.barCategoryGap;
     y != null && (f = y);
-  }), f == null && (f = C(35 - g.length * 4, 15) + "%");
+  }), f == null && (f = H(35 - g.length * 4, 15) + "%");
   var A = R(f, t), b = R(i, 1), p = (a - A) / (e + (e - 1) * b);
-  p = C(p, 0), P(g, function(o) {
+  p = H(p, 0), P(g, function(o) {
     var s = h[o], c = s.maxWidth, v = s.minWidth;
     if (s.width) {
       var n = s.width;
-      c && (n = Y(n, c)), v && (n = C(n, v)), s.width = n, a -= n + b * n, e--;
+      c && (n = Y(n, c)), v && (n = H(n, v)), s.width = n, a -= n + b * n, e--;
     } else {
       var n = p;
       c && c < n && (n = Y(c, a)), v && v > n && (n = v), n !== p && (s.width = n, a -= n + b * n, e--);
     }
-  }), p = (a - A) / (e + (e - 1) * b), p = C(p, 0);
+  }), p = (a - A) / (e + (e - 1) * b), p = H(p, 0);
   var x = 0, d;
   P(g, function(o) {
     var s = h[o];
@@ -161,11 +161,11 @@ function Pa(r) {
     }, u += s.width * (1 + b);
   }), I;
 }
-function Ha(r) {
+function Ca(r) {
   return {
     seriesType: r,
     overallReset: function(t) {
-      var a = H(r, N);
+      var a = C(r, N);
       ga(t, a, function(e) {
         process.env.NODE_ENV !== "production" && Q(e instanceof ya);
         var f = Wa(e, r);
@@ -181,7 +181,7 @@ function Ha(r) {
     }
   };
 }
-function za(r) {
+function Fa(r) {
   return {
     seriesType: r,
     plan: pa(),
@@ -190,15 +190,15 @@ function za(r) {
         var a = t.getData(), e = t.coordinateSystem, f = e.getBaseAxis(), i = e.getOtherAxis(f), g = a.getDimensionIndex(a.mapDimension(i.dim)), h = a.getDimensionIndex(a.mapDimension(f.dim)), A = t.get("showBackground", !0), b = a.mapDimension(i.dim), p = a.getCalculationInfo("stackResultDimension"), x = ha(a, b) && !!a.getCalculationInfo("stackedOnSeries"), d = i.isHorizontal(), I = i.toGlobalCoord(i.dataToCoord(Ba(i))), u = aa(t), o = t.get("barMinHeight") || 0, s = p && a.getDimensionIndex(p), c = a.getLayout("size"), v = a.getLayout("offset");
         return {
           progress: function(n, S) {
-            for (var l = n.count, m = u && U(l * 3), y = u && A && U(l * 3), D = u && U(l), T = e.master.getRect(), ta = d ? T.width : T.height, _, z = S.getStore(), G = 0; (_ = n.next()) != null; ) {
-              var F = z.get(x ? s : g, _), k = z.get(h, _), M = I, V = void 0;
-              x && (V = +F - z.get(g, _));
+            for (var l = n.count, m = u && U(l * 3), y = u && A && U(l * 3), D = u && U(l), T = e.master.getRect(), ta = d ? T.width : T.height, _, F = S.getStore(), G = 0; (_ = n.next()) != null; ) {
+              var z = F.get(x ? s : g, _), k = F.get(h, _), M = I, V = void 0;
+              x && (V = +z - F.get(g, _));
               var O = void 0, W = void 0, L = void 0, w = void 0;
               if (d) {
-                var E = e.dataToPoint([F, k]);
+                var E = e.dataToPoint([z, k]);
                 x && (M = e.dataToPoint([V, k])[0]), O = M, W = E[1] + v, L = E[0] - M, w = c, K(L) < o && (L = (L < 0 ? -1 : 1) * o);
               } else {
-                var E = e.dataToPoint([k, F]);
+                var E = e.dataToPoint([k, z]);
                 x && (M = e.dataToPoint([k, V])[1]), O = E[0] + v, W = M, L = c, w = E[1] - M, K(w) < o && (w = (w <= 0 ? -1 : 1) * o);
               }
               u ? (m[G] = O, m[G + 1] = W, m[G + 2] = d ? L : w, y && (y[G] = d ? T.x : O, y[G + 1] = d ? W : T.y, y[G + 2] = ta), D[_] = _) : S.setItemLayout(_, {
@@ -224,12 +224,12 @@ function aa(r) {
   return r.pipelineContext && r.pipelineContext.large;
 }
 function Ra(r) {
-  return Ga(H(r, N));
+  return Ga(C(r, N));
 }
-function Fa(r) {
+function za(r) {
   Ma(r, function() {
     function t(a) {
-      var e = H(a, N);
+      var e = C(a, N);
       wa(r, e, a, N), Ia(e, Ra(a));
     }
     t("bar"), t("pictorialBar");
@@ -310,8 +310,8 @@ $.registerClass(Na);
 export {
   Na as B,
   ka as S,
-  za as a,
-  Ca as b,
-  Ha as c,
-  Fa as r
+  Fa as a,
+  Ha as b,
+  Ca as c,
+  za as r
 };

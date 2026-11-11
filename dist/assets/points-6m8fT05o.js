@@ -1,4 +1,4 @@
-import { _ as U, L as F, aP as H, aQ as j, aR as B, u as V, s as q, g as K, n as X, ab as Q, ai as $, k as T, o as J, x as W, j as x, ac as M, aS as ee, G as w, q as te, f as ae, aT as se, aU as re, m as le, N as R, O as ie, aB as oe } from "./installCanvasRenderer-CJsrED7t.js";
+import { _ as U, L as F, aP as B, aQ as H, aR as j, o as V, s as K, n as Q, z as X, ab as $, ai as q, y as T, A as J, E as W, x, ac as M, aS as ee, G as w, B as te, l as ae, aT as se, aU as re, m as le, N as R, O as ie, aB as oe } from "./installCanvasRenderer-nrYOY0X5.js";
 /*! Third-party licenses: see THIRD_PARTY_NOTICES.md and licenses/ in the Composer package. */
 var ne = (
   /** @class */
@@ -12,7 +12,7 @@ var ne = (
       this.removeAll();
       var n = F(e, -1, -1, 2, 2, null, s);
       n.attr({
-        z2: H(o, 100),
+        z2: B(o, 100),
         culling: !0,
         scaleX: r[0] / 2,
         scaleY: r[1] / 2
@@ -24,9 +24,9 @@ var ne = (
     }, a.prototype.getSymbolPath = function() {
       return this.childAt(0);
     }, a.prototype.highlight = function() {
-      j(this.childAt(0));
+      H(this.childAt(0));
     }, a.prototype.downplay = function() {
-      B(this.childAt(0));
+      j(this.childAt(0));
     }, a.prototype.setZ = function(e, t) {
       var l = this.childAt(0);
       l.zlevel = e, l.z = t;
@@ -46,7 +46,7 @@ var ne = (
           scaleX: n[0] / 2,
           scaleY: n[1] / 2
         };
-        m ? i.attr(c) : V(i, c, s, t), q(i);
+        m ? i.attr(c) : V(i, c, s, t), K(i);
       }
       if (this._updateCommon(e, t, n, l, r), h) {
         var i = this.childAt(0);
@@ -59,7 +59,7 @@ var ne = (
               opacity: i.style.opacity
             }
           };
-          i.scaleX = i.scaleY = 0, i.style.opacity = 0, K(i, c, s, t);
+          i.scaleX = i.scaleY = 0, i.style.opacity = 0, Q(i, c, s, t);
         }
       }
       m && this.childAt(0).stopAnimation("leave");
@@ -71,10 +71,10 @@ var ne = (
       }
       var A = e.getItemVisual(t, "symbolRotate");
       s.attr("rotation", (A || 0) * Math.PI / 180 || 0);
-      var b = Q(e.getItemVisual(t, "symbolOffset"), l);
+      var b = $(e.getItemVisual(t, "symbolOffset"), l);
       b && (s.x = b[0], s.y = b[1]), p && s.attr("cursor", p);
       var I = e.getItemVisual(t, "style"), O = I.fill;
-      if (s instanceof $) {
+      if (s instanceof q) {
         var _ = s.style;
         s.useStyle(T({
           // TODO other properties like x, y ?
@@ -88,16 +88,16 @@ var ne = (
         s.__isEmptyBrush ? s.useStyle(T({}, I)) : s.useStyle(I), s.style.decal = null, s.setColor(O, o && o.symbolInnerColor), s.style.strokeNoScale = !0;
       var C = e.getItemVisual(t, "liftZ"), z = this._z2;
       C != null ? z == null && (this._z2 = s.z2, s.z2 += C) : z != null && (s.z2 = z, this._z2 = null);
-      var k = o && o.useNameLabel;
+      var Z = o && o.useNameLabel;
       J(s, d, {
         labelFetcher: n,
         labelDataIndex: t,
-        defaultText: Z,
+        defaultText: k,
         inheritColor: O,
         defaultOpacity: I.opacity
       });
-      function Z(P) {
-        return k ? e.getName(P) : te(e, P);
+      function k(P) {
+        return Z ? e.getName(P) : te(e, P);
       }
       this._sizeX = l[0] / 2, this._sizeY = l[1] / 2;
       var D = s.ensureState("emphasis");

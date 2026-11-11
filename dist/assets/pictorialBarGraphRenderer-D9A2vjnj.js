@@ -1,10 +1,10 @@
 var se = Object.defineProperty;
 var ce = (t, a, e) => a in t ? se(t, a, { enumerable: !0, configurable: !0, writable: !0, value: e }) : t[a] = e;
 var V = (t, a, e) => ce(t, typeof a != "symbol" ? a + "" : a, e);
-import { _ as F, h as ue, j as ve, C as pe, ab as de, G, o as he, q as fe, n as ge, x as me, u as J, z as K, ac as ye, d as Q, ad as L, ae as Se, af as xe, ag as _e, k as w, R as Z, ah as N, L as Pe, ai as be, i as Re, t as Ce, E as De, F as Ie, H as we, I as ze, J as Ae, K as Be } from "./installCanvasRenderer-CJsrED7t.js";
-import { b as R, B as X, c as Le, a as Oe, r as Te } from "./BaseBarSeries-vN-5r6zc.js";
+import { _ as Z, v as ue, x as ve, C as pe, ab as de, G, A as he, B as fe, z as ge, E as me, o as q, H as F, ac as ye, j as J, ad as L, ae as Se, af as xe, ag as _e, y as w, R as K, ah as N, L as Pe, ai as be, f as Re, t as Ce, i as De, u as Ae, a as we, b as ze, c as Be, d as Ie } from "./installCanvasRenderer-nrYOY0X5.js";
+import { b as R, B as X, c as Le, a as Oe, r as Te } from "./BaseBarSeries-DYc5uKGI.js";
 /*! Third-party licenses: see THIRD_PARTY_NOTICES.md and licenses/ in the Composer package. */
-var Ee = ["itemStyle", "borderWidth"], k = [{
+var Ee = ["itemStyle", "borderWidth"], H = [{
   xy: "x",
   wh: "width",
   index: 0,
@@ -14,10 +14,10 @@ var Ee = ["itemStyle", "borderWidth"], k = [{
   wh: "height",
   index: 1,
   posDesc: ["top", "bottom"]
-}], A = new Se(), Ye = (
+}], B = new Se(), Ye = (
   /** @class */
   (function(t) {
-    F(a, t);
+    Z(a, t);
     function a() {
       var e = t !== null && t.apply(this, arguments) || this;
       return e.type = R, e;
@@ -32,12 +32,12 @@ var Ee = ["itemStyle", "borderWidth"], k = [{
         coordSys: h,
         coordSysExtent: [[p.x, p.x + p.width], [p.y, p.y + p.height]],
         isHorizontal: v,
-        valueDim: k[+v],
-        categoryDim: k[1 - +v]
+        valueDim: H[+v],
+        categoryDim: H[1 - +v]
       };
       o.diff(d).add(function(s) {
         if (o.hasValue(s)) {
-          var c = W(o, s), g = H(o, s, c, l), m = U(o, l, g);
+          var c = W(o, s), g = k(o, s, c, l), m = U(o, l, g);
           o.setItemGraphicEl(s, m), n.add(m), $(m, l, g);
         }
       }).update(function(s, c) {
@@ -46,7 +46,7 @@ var Ee = ["itemStyle", "borderWidth"], k = [{
           n.remove(g);
           return;
         }
-        var m = W(o, s), y = H(o, s, m, l), S = re(o, y);
+        var m = W(o, s), y = k(o, s, m, l), S = re(o, y);
         g && S !== g.__pictorialShapeStr && (n.remove(g), o.setItemGraphicEl(s, null), g = null), g ? Ue(g, l, y) : g = U(o, l, y, !0), o.setItemGraphicEl(s, g), g.__pictorialSymbolMeta = y, n.add(g), $(g, l, y);
       }).remove(function(s) {
         var c = d.getItemGraphicEl(s);
@@ -62,7 +62,7 @@ var Ee = ["itemStyle", "borderWidth"], k = [{
     }, a.type = R, a;
   })(pe)
 );
-function H(t, a, e, i) {
+function k(t, a, e, i) {
   var r = t.getItemLayout(a), n = e.get("symbolRepeat"), o = e.get("symbolClip"), d = e.get("symbolPosition") || "start", h = e.get("symbolRotate"), f = (h || 0) * Math.PI / 180 || 0, v = e.get("symbolPatternSize") || 2, p = e.isAnimationEnabled(), l = {
     dataIndex: a,
     layout: r,
@@ -80,42 +80,42 @@ function H(t, a, e, i) {
   };
   Ve(e, n, r, i, l), Ge(t, a, r, n, o, l.boundingLength, l.pxSign, v, i, l), Xe(e, l.symbolScale, f, i, l);
   var u = l.symbolSize, s = de(e.get("symbolOffset"), u);
-  return ke(e, u, r, n, o, s, d, l.valueLineWidth, l.boundingLength, l.repeatCutLength, i, l), l;
+  return He(e, u, r, n, o, s, d, l.valueLineWidth, l.boundingLength, l.repeatCutLength, i, l), l;
 }
 function Ve(t, a, e, i, r) {
   var n = i.valueDim, o = t.get("symbolBoundingData"), d = i.coordSys.getOtherAxis(i.coordSys.getBaseAxis()), h = d.toGlobalCoord(d.dataToCoord(0)), f = 1 - +(e[n.wh] <= 0), v;
-  if (Q(o)) {
-    var p = [B(d, o[0]) - h, B(d, o[1]) - h];
+  if (J(o)) {
+    var p = [I(d, o[0]) - h, I(d, o[1]) - h];
     p[1] < p[0] && p.reverse(), v = p[f];
-  } else o != null ? v = B(d, o) - h : a ? v = i.coordSysExtent[n.index][f] - h : v = e[n.wh];
+  } else o != null ? v = I(d, o) - h : a ? v = i.coordSysExtent[n.index][f] - h : v = e[n.wh];
   r.boundingLength = v, a && (r.repeatCutLength = e[n.wh]);
   var l = n.xy === "x", u = d.inverse;
   r.pxSign = l && !u || !l && u ? v >= 0 ? 1 : -1 : v > 0 ? 1 : -1;
 }
-function B(t, a) {
+function I(t, a) {
   return t.toGlobalCoord(t.dataToCoord(t.scale.parse(a)));
 }
 function Ge(t, a, e, i, r, n, o, d, h, f) {
   var v = h.valueDim, p = h.categoryDim, l = Math.abs(e[p.wh]), u = t.getItemVisual(a, "symbolSize"), s;
-  Q(u) ? s = u.slice() : u == null ? s = ["100%", "100%"] : s = [u, u], s[p.index] = L(s[p.index], l), s[v.index] = L(s[v.index], i ? l : Math.abs(n)), f.symbolSize = s;
+  J(u) ? s = u.slice() : u == null ? s = ["100%", "100%"] : s = [u, u], s[p.index] = L(s[p.index], l), s[v.index] = L(s[v.index], i ? l : Math.abs(n)), f.symbolSize = s;
   var c = f.symbolScale = [s[0] / d, s[1] / d];
   c[v.index] *= (h.isHorizontal ? -1 : 1) * o;
 }
 function Xe(t, a, e, i, r) {
   var n = t.get(Ee) || 0;
-  n && (A.attr({
+  n && (B.attr({
     scaleX: a[0],
     scaleY: a[1],
     rotation: e
-  }), A.updateTransform(), n /= A.getLineScale(), n *= a[i.valueDim.index]), r.valueLineWidth = n || 0;
+  }), B.updateTransform(), n /= B.getLineScale(), n *= a[i.valueDim.index]), r.valueLineWidth = n || 0;
 }
-function ke(t, a, e, i, r, n, o, d, h, f, v, p) {
+function He(t, a, e, i, r, n, o, d, h, f, v, p) {
   var l = v.categoryDim, u = v.valueDim, s = p.pxSign, c = Math.max(a[u.index] + d, 0), g = c;
   if (i) {
     var m = Math.abs(h), y = xe(t.get("symbolMargin"), "15%") + "", S = !1;
     y.lastIndexOf("!") === y.length - 1 && (S = !0, y = y.slice(0, y.length - 1));
-    var x = L(y, a[u.index]), C = Math.max(c + x * 2, 0), D = S ? 0 : x * 2, T = _e(i), _ = T ? i : q((m + D) / C), le = m - _ * c;
-    x = le / 2 / (S ? _ : Math.max(_ - 1, 1)), C = c + x * 2, D = S ? 0 : x * 2, !T && i !== "fixed" && (_ = f ? q((Math.abs(f) + D) / C) : 0), g = _ * C - D, p.repeatTimes = _, p.symbolMargin = x;
+    var x = L(y, a[u.index]), C = Math.max(c + x * 2, 0), D = S ? 0 : x * 2, T = _e(i), _ = T ? i : Q((m + D) / C), le = m - _ * c;
+    x = le / 2 / (S ? _ : Math.max(_ - 1, 1)), C = c + x * 2, D = S ? 0 : x * 2, !T && i !== "fixed" && (_ = f ? Q((Math.abs(f) + D) / C) : 0), g = _ * C - D, p.repeatTimes = _, p.symbolMargin = x;
   }
   var z = s * (g / 2), b = p.pathPosition = [];
   b[l.index] = e[l.wh] / 2, b[u.index] = o === "start" ? z : o === "end" ? h - z : h / 2, n && (b[0] += n[0], b[1] += n[1]);
@@ -123,8 +123,8 @@ function ke(t, a, e, i, r, n, o, d, h, f, v, p) {
   E[l.index] = e[l.xy], E[u.index] = e[u.xy];
   var Y = p.barRectShape = w({}, e);
   Y[u.wh] = s * Math.max(Math.abs(e[u.wh]), Math.abs(b[u.index] + z)), Y[l.wh] = e[l.wh];
-  var I = p.clipShape = {};
-  I[l.xy] = -e[l.xy], I[l.wh] = v.ecSize[l.wh], I[u.xy] = 0, I[u.wh] = e[u.wh];
+  var A = p.clipShape = {};
+  A[l.xy] = -e[l.xy], A[l.wh] = v.ecSize[l.wh], A[u.xy] = 0, A[u.wh] = e[u.wh];
 }
 function M(t) {
   var a = t.symbolPatternSize, e = Pe(
@@ -199,7 +199,7 @@ function ae(t, a, e) {
   var i = w({}, a.barRectShape), r = t.__pictorialBarRect;
   r ? P(r, null, {
     shape: i
-  }, a, e) : (r = t.__pictorialBarRect = new Z({
+  }, a, e) : (r = t.__pictorialBarRect = new K({
     z2: 2,
     shape: i,
     silent: !0,
@@ -214,11 +214,11 @@ function ie(t, a, e, i) {
   if (e.symbolClip) {
     var r = t.__pictorialClipPath, n = w({}, e.clipShape), o = a.valueDim, d = e.animationModel, h = e.dataIndex;
     if (r)
-      J(r, {
+      q(r, {
         shape: n
       }, d, h);
     else {
-      n[o.wh] = 0, r = new Z({
+      n[o.wh] = 0, r = new K({
         shape: n
       }), t.__pictorialBundle.setClipPath(r), t.__pictorialClipPath = r;
       var f = {};
@@ -230,9 +230,9 @@ function ie(t, a, e, i) {
 }
 function W(t, a) {
   var e = t.getItemModel(a);
-  return e.getAnimationDelayParams = He, e.isAnimationEnabled = We, e;
+  return e.getAnimationDelayParams = ke, e.isAnimationEnabled = We, e;
 }
-function He(t) {
+function ke(t) {
   return {
     index: t.__pictorialAnimationIndex,
     count: t.__pictorialRepeatTimes
@@ -247,7 +247,7 @@ function U(t, a, e, i) {
 }
 function Ue(t, a, e) {
   var i = e.animationModel, r = e.dataIndex, n = t.__pictorialBundle;
-  J(n, {
+  q(n, {
     x: e.bundlePosition[0],
     y: e.bundlePosition[1]
   }, i, r), e.symbolRepeat ? ee(t, a, e, !0) : te(t, a, e, !0), ae(t, e, !0), ie(t, a, e, !0);
@@ -258,7 +258,7 @@ function j(t, a, e, i) {
   var n = [];
   O(i, function(o) {
     n.push(o);
-  }), i.__pictorialMainPath && n.push(i.__pictorialMainPath), i.__pictorialClipPath && (e = null), K(n, function(o) {
+  }), i.__pictorialMainPath && n.push(i.__pictorialMainPath), i.__pictorialClipPath && (e = null), F(n, function(o) {
     ye(o, {
       scaleX: 0,
       scaleY: 0
@@ -271,7 +271,7 @@ function re(t, a) {
   return [t.getItemVisual(a.dataIndex, "symbol") || "none", !!a.symbolRepeat, !!a.symbolClip].join(":");
 }
 function O(t, a, e) {
-  K(t.__pictorialBundle.children(), function(i) {
+  F(t.__pictorialBundle.children(), function(i) {
     i !== t.__pictorialBarRect && a.call(e, i);
   });
 }
@@ -306,14 +306,14 @@ function $(t, a, e) {
     defaultOutsidePosition: u
   }), me(t, v, p, n.get("disabled"));
 }
-function q(t) {
+function Q(t) {
   var a = Math.round(t);
   return Math.abs(t - a) < 1e-4 ? a : Math.ceil(t);
 }
 var je = (
   /** @class */
   (function(t) {
-    F(a, t);
+    Z(a, t);
     function a() {
       var e = t !== null && t.apply(this, arguments) || this;
       return e.type = a.type, e.hasSymbolVisual = !0, e.defaultSymbol = "roundRect", e;
@@ -364,7 +364,7 @@ const ne = {
   "rounded-rectangle": "roundRect",
   triangle: "triangle"
 };
-function qe(t) {
+function Qe(t) {
   if (typeof t != "object" || t === null || !("categories" in t) || !("series" in t) || !("orientation" in t))
     return !1;
   const a = t.categories, e = t.series;
@@ -374,7 +374,7 @@ function oe(t) {
   const a = t.series.flatMap((e) => e.values).filter((e) => e !== null);
   return Math.max(0, ...a);
 }
-function Fe(t) {
+function Ze(t) {
   const a = oe(t);
   return t.series.map((e) => {
     const i = e.mode === "repeated";
@@ -393,14 +393,14 @@ function Fe(t) {
     };
   });
 }
-Ie([$e, we, ze, Ae, Be]);
-class Je {
+Ae([$e, we, ze, Be, Ie]);
+class qe {
   constructor(a) {
     V(this, "chart");
     this.chart = De(a, void 0, { renderer: "canvas" });
   }
   render(a) {
-    if (!qe(a))
+    if (!Qe(a))
       throw new Error("The pictorial bar graph data is invalid.");
     const e = getComputedStyle(document.documentElement), i = e.getPropertyValue("--bs-body-color").trim() || "#212529", r = e.getPropertyValue("--cms-border").trim() || "#dee2e6", n = e.getPropertyValue("--cms-surface").trim() || "#ffffff", o = {
       type: "category",
@@ -434,7 +434,7 @@ class Je {
       },
       xAxis: h ? d : o,
       yAxis: h ? o : d,
-      series: Fe(a)
+      series: Ze(a)
     };
     this.chart.setOption(f, !0);
   }
@@ -445,7 +445,7 @@ class Je {
     this.chart.dispose();
   }
 }
-const Ne = (t) => new Je(t);
+const Ne = (t) => new qe(t);
 export {
   Ne as createPictorialBarGraphRenderer
 };

@@ -20,6 +20,15 @@ return [
         'social'      => 'Sociaal',
         'title'       => 'Marketingbereik',
     ],
+    'monthly-performance' => [
+        'conversion'         => 'Conversie',
+        'conversion-axis'    => 'Conversie (%)',
+        'description'        => 'Maandelijks bezoekersvolume vergeleken met het conversiepercentage.',
+        'new-visitors'       => 'Nieuwe bezoekers',
+        'returning-visitors' => 'Terugkerende bezoekers',
+        'title'              => 'Maandprestaties',
+        'visitors'           => 'Bezoekers',
+    ],
     'quarterly-sales' => [
         'description' => 'Online- en winkelverkoop per kwartaal als gestapelde balken.',
         'online'      => 'Online',
