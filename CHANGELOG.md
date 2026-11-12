@@ -15,7 +15,7 @@ This project follows semantic versioning: `MAJOR.MINOR.PATCH`.
 - Added a lazy, package-owned Apache ECharts renderer for multi-series line
   graphs with linear and logarithmic presentation scales.
 - Added package-owned `axis.line` generation and a translated Rainfall example
-  with Artisan commands for safe publication and removal.
+  with Artisan commands for generation, safe publication, and removal.
 - Added the `axis.bar` graph type with vertical, horizontal, grouped, stacked,
   and percentage presentations, a lazy renderer, package-owned generation, and
   a translated publishable Quarterly Sales example.

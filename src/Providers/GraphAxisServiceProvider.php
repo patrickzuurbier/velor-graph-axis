@@ -7,6 +7,7 @@ namespace Velor\GraphAxis\Providers;
 use App\Services\Graphs\Contracts\GraphTypeRegistryInterface;
 use App\Services\Graphs\Data\GraphTypeData;
 use Illuminate\Support\ServiceProvider;
+use Velor\GraphAxis\Console\Commands\MakeAxisGraphCommand;
 use Velor\GraphAxis\Console\Commands\PublishGraphExampleCommand;
 use Velor\GraphAxis\Console\Commands\RemoveGraphExampleCommand;
 use Velor\GraphAxis\Contracts\BarGraphInterface;
@@ -30,6 +31,7 @@ class GraphAxisServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
+                MakeAxisGraphCommand::class,
                 PublishGraphExampleCommand::class,
                 RemoveGraphExampleCommand::class,
             ]);
@@ -40,35 +42,30 @@ class GraphAxisServiceProvider extends ServiceProvider
             version: 1,
             graphContract: BarGraphInterface::class,
             resultContract: BarGraphResultInterface::class,
-            generatorStub: $packagePath . '/stubs/axis.bar.stub',
         ));
         $graphTypes->register(new GraphTypeData(
             key: LineGraphInterface::TYPE,
             version: 1,
             graphContract: LineGraphInterface::class,
             resultContract: LineGraphResultInterface::class,
-            generatorStub: $packagePath . '/stubs/axis.line.stub',
         ));
         $graphTypes->register(new GraphTypeData(
             key: MixedGraphInterface::TYPE,
             version: 1,
             graphContract: MixedGraphInterface::class,
             resultContract: MixedGraphResultInterface::class,
-            generatorStub: $packagePath . '/stubs/axis.mixed.stub',
         ));
         $graphTypes->register(new GraphTypeData(
             key: PictorialBarGraphInterface::TYPE,
             version: 1,
             graphContract: PictorialBarGraphInterface::class,
             resultContract: PictorialBarGraphResultInterface::class,
-            generatorStub: $packagePath . '/stubs/axis.pictorial-bar.stub',
         ));
         $graphTypes->register(new GraphTypeData(
             key: ScatterGraphInterface::TYPE,
             version: 1,
             graphContract: ScatterGraphInterface::class,
             resultContract: ScatterGraphResultInterface::class,
-            generatorStub: $packagePath . '/stubs/axis.scatter.stub',
         ));
     }
 }

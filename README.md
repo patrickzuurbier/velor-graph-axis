@@ -29,7 +29,7 @@ not install ECharts or package-specific npm dependencies themselves.
 Generate a line graph:
 
 ```bash
-php artisan velor:make:graph MonthlySalesGraph --type=axis.line
+php artisan velor:make:axis-graph MonthlySalesGraph --line
 ```
 
 The command creates `app/Graphs/MonthlySalesGraph.php` with its stable key,
@@ -79,7 +79,7 @@ package constrains the returned result, not how values are calculated.
 Generate a bar graph:
 
 ```bash
-php artisan velor:make:graph QuarterlySalesGraph --type=axis.bar
+php artisan velor:make:axis-graph QuarterlySalesGraph --bar
 ```
 
 Bar graphs extend `AbstractBarGraph`. Their result defines categories, series,
@@ -126,7 +126,7 @@ class QuarterlySalesGraph extends AbstractBarGraph
 Generate a pictorial bar graph:
 
 ```bash
-php artisan velor:make:graph WeeklyVisitorsGraph --type=axis.pictorial-bar
+php artisan velor:make:axis-graph WeeklyVisitorsGraph --pictorial-bar
 ```
 
 Pictorial bar graphs extend `AbstractPictorialBarGraph`. Select a predefined
@@ -170,7 +170,7 @@ non-negative.
 Generate a scatter graph:
 
 ```bash
-php artisan velor:make:graph MarketingReachGraph --type=axis.scatter
+php artisan velor:make:axis-graph MarketingReachGraph --scatter
 ```
 
 Scatter graphs extend `AbstractScatterGraph`. Every point has numeric `x` and
@@ -212,7 +212,7 @@ Axis labels are optional.
 Generate a mixed line/bar graph:
 
 ```bash
-php artisan velor:make:graph MonthlyPerformanceGraph --type=axis.mixed
+php artisan velor:make:axis-graph MonthlyPerformanceGraph --mixed
 ```
 
 Mixed graphs extend `AbstractMixedGraph`. Every series selects `LINE` or `BAR`

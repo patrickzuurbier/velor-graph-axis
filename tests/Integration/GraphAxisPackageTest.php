@@ -25,14 +25,12 @@ class GraphAxisPackageTest extends AbstractIntegrationTestCase
      * @param string $key Registered graph type key.
      * @param class-string $graphContract Registered graph contract.
      * @param class-string $resultContract Registered result contract.
-     * @param string $stub Package stub filename.
      */
     #[DataProvider('graphTypeProvider')]
     public function test_package_registers_an_axis_graph_type(
         string $key,
         string $graphContract,
         string $resultContract,
-        string $stub,
     ): void {
         $graphTypes = $this->app->make(GraphTypeRegistryInterface::class);
         $type = $graphTypes->find($key);
@@ -41,9 +39,6 @@ class GraphAxisPackageTest extends AbstractIntegrationTestCase
         $this->assertSame(1, $type->version);
         $this->assertSame($graphContract, $type->graphContract);
         $this->assertSame($resultContract, $type->resultContract);
-        $this->assertNotNull($type->generatorStub);
-        $this->assertFileExists($type->generatorStub);
-        $this->assertStringEndsWith('/stubs/' . $stub, $type->generatorStub);
     }
 
     public function test_package_loads_the_example_translations(): void
@@ -77,7 +72,7 @@ class GraphAxisPackageTest extends AbstractIntegrationTestCase
     }
 
     /**
-     * @return array<string, array{string, class-string, class-string, string}>
+     * @return array<string, array{string, class-string, class-string}>
      */
     public static function graphTypeProvider(): array
     {
@@ -86,31 +81,26 @@ class GraphAxisPackageTest extends AbstractIntegrationTestCase
                 BarGraphInterface::TYPE,
                 BarGraphInterface::class,
                 BarGraphResultInterface::class,
-                'axis.bar.stub',
             ],
             'line' => [
                 LineGraphInterface::TYPE,
                 LineGraphInterface::class,
                 LineGraphResultInterface::class,
-                'axis.line.stub',
             ],
             'mixed' => [
                 MixedGraphInterface::TYPE,
                 MixedGraphInterface::class,
                 MixedGraphResultInterface::class,
-                'axis.mixed.stub',
             ],
             'pictorial bar' => [
                 PictorialBarGraphInterface::TYPE,
                 PictorialBarGraphInterface::class,
                 PictorialBarGraphResultInterface::class,
-                'axis.pictorial-bar.stub',
             ],
             'scatter' => [
                 ScatterGraphInterface::TYPE,
                 ScatterGraphInterface::class,
                 ScatterGraphResultInterface::class,
-                'axis.scatter.stub',
             ],
         ];
     }

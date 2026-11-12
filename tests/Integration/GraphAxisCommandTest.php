@@ -41,14 +41,14 @@ class GraphAxisCommandTest extends AbstractIntegrationTestCase
     #[DataProvider('graphTypeProvider')]
     public function test_it_generates_an_application_axis_graph(
         string $name,
-        string $type,
+        string $option,
         string $baseClass,
         string $key,
         string $title,
     ): void {
-        $command = $this->artisan('velor:make:graph', [
-            'name'   => $name,
-            '--type' => $type,
+        $command = $this->artisan('velor:make:axis-graph', [
+            'name'        => $name,
+            "--{$option}" => true,
         ]);
 
         $this->assertInstanceOf(PendingCommand::class, $command);
@@ -65,6 +65,23 @@ class GraphAxisCommandTest extends AbstractIntegrationTestCase
         $this->assertStringContainsString("return '{$key}';", $content);
         $this->assertStringContainsString("return '{$title}';", $content);
         $this->assertNotEmpty(token_get_all($content, TOKEN_PARSE));
+    }
+
+    public function test_it_requires_exactly_one_axis_graph_type(): void
+    {
+        $missing = $this->artisan('velor:make:axis-graph', ['name' => 'Rain']);
+
+        $this->assertInstanceOf(PendingCommand::class, $missing);
+        $missing->assertExitCode(Command::FAILURE)->run();
+
+        $multiple = $this->artisan('velor:make:axis-graph', [
+            'name'   => 'Rain',
+            '--line' => true,
+            '--bar'  => true,
+        ]);
+
+        $this->assertInstanceOf(PendingCommand::class, $multiple);
+        $multiple->assertExitCode(Command::FAILURE)->run();
     }
 
     #[DataProvider('exampleProvider')]
@@ -178,25 +195,25 @@ class GraphAxisCommandTest extends AbstractIntegrationTestCase
     public static function graphTypeProvider(): array
     {
         return [
-            'line'  => ['MonthlySales', 'axis.line', 'AbstractLineGraph', 'monthly-sales', 'Monthly Sales'],
+            'line'  => ['MonthlySales', 'line', 'AbstractLineGraph', 'monthly-sales', 'Monthly Sales'],
             'mixed' => [
                 'MonthlyPerformance',
-                'axis.mixed',
+                'mixed',
                 'AbstractMixedGraph',
                 'monthly-performance',
                 'Monthly Performance',
             ],
-            'bar'           => ['QuarterlySales', 'axis.bar', 'AbstractBarGraph', 'quarterly-sales', 'Quarterly Sales'],
+            'bar'           => ['QuarterlySales', 'bar', 'AbstractBarGraph', 'quarterly-sales', 'Quarterly Sales'],
             'pictorial bar' => [
                 'WeeklyVisitors',
-                'axis.pictorial-bar',
+                'pictorial-bar',
                 'AbstractPictorialBarGraph',
                 'weekly-visitors',
                 'Weekly Visitors',
             ],
             'scatter' => [
                 'MarketingReach',
-                'axis.scatter',
+                'scatter',
                 'AbstractScatterGraph',
                 'marketing-reach',
                 'Marketing Reach',
