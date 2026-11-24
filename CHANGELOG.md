@@ -6,6 +6,8 @@ This project follows semantic versioning: `MAJOR.MINOR.PATCH`.
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-11-24
+
 ### Changed
 
 - Added consistent Velor branding to the package documentation.
@@ -40,6 +42,7 @@ This project follows semantic versioning: `MAJOR.MINOR.PATCH`.
   optional bar stacking, primary and secondary value axes, package-owned
   generation, and a translated publishable Monthly Performance example.
 
-[Unreleased]: https://github.com/patrickzuurbier/velor-graph-axis/compare/1.1.0...HEAD
+[Unreleased]: https://github.com/patrickzuurbier/velor-graph-axis/compare/1.1.1...HEAD
+[1.1.1]: https://github.com/patrickzuurbier/velor-graph-axis/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/patrickzuurbier/velor-graph-axis/compare/1.0.0...1.1.0
 [1.0.0]: https://github.com/patrickzuurbier/velor-graph-axis/releases/tag/1.0.0
