@@ -1,4 +1,7 @@
-# Velor Graph Axis
+<div align="center">
+    <img src="https://velorstack.nl/images/velor-logo.png" alt="Velor" width="88">
+    <h1>Velor Graph Axis</h1>
+</div>
 
 Axis graph types for Velor. The package provides renderer-neutral PHP
 contracts and lazy Apache ECharts adapters for line, bar, pictorial bar,

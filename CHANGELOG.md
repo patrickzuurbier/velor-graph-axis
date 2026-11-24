@@ -6,6 +6,10 @@ This project follows semantic versioning: `MAJOR.MINOR.PATCH`.
 
 ## [Unreleased]
 
+### Changed
+
+- Added consistent Velor branding to the package documentation.
+
 ## [1.1.0] - 2026-11-24
 
 ### Changed
