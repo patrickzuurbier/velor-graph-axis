@@ -10,7 +10,7 @@ function d(t) {
   const e = t.categories, o = t.series;
   return !Array.isArray(e) || !e.every((r) => typeof r == "string") ? !1 : Array.isArray(o) && o.every((r) => typeof r != "object" || r === null || !("key" in r) || typeof r.key != "string" || !("label" in r) || typeof r.label != "string" || !("values" in r) || !Array.isArray(r.values) ? !1 : r.values.every((i) => typeof i == "number" || i === null) && r.values.length === e.length);
 }
-function x(t) {
+function v(t) {
   return t.map((e) => ({
     type: "line",
     id: e.key,
@@ -21,7 +21,7 @@ function x(t) {
     emphasis: { focus: "series" }
   }));
 }
-function v(t) {
+function x(t) {
   return t.scale === "logarithmic" ? "log" : "value";
 }
 f([y, g, h, m, b]);
@@ -33,7 +33,7 @@ class A {
   render(e, o) {
     if (!d(e))
       throw new Error("The line graph data is invalid.");
-    const r = getComputedStyle(document.documentElement), i = r.getPropertyValue("--bs-body-color").trim() || "#212529", l = r.getPropertyValue("--cms-border").trim() || "#dee2e6", a = r.getPropertyValue("--cms-surface").trim() || "#ffffff", s = {
+    const r = getComputedStyle(document.documentElement), i = r.getPropertyValue("--bs-body-color").trim() || "#212529", l = r.getPropertyValue("--velor-border").trim() || "#dee2e6", a = r.getPropertyValue("--velor-surface").trim() || "#ffffff", s = {
       animationDuration: 350,
       color: ["#457b9d", "#e76f51", "#2a9d8f", "#e9c46a"],
       grid: {
@@ -61,11 +61,11 @@ class A {
         axisLine: { lineStyle: { color: l } }
       },
       yAxis: {
-        type: v(o),
+        type: x(o),
         axisLabel: { color: i },
         splitLine: { lineStyle: { color: l } }
       },
-      series: x(e.series)
+      series: v(e.series)
     };
     this.chart.setOption(s, !0);
   }

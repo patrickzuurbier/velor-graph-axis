@@ -1,12 +1,12 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
     "name": "patrickzuurbier/velor-graph-axis",
-    "description": "Axis graph types for Velor CMS.",
+    "description": "Axis graph types for Velor.",
     "type": "library",
     "license": "MIT",
     "require": {
         "php": "^8.4.1",
-        "velor/cms": "^1.22"
+        "velor/cms": "^1.26"
     },
     "autoload": {
         "psr-4": {
@@ -24,7 +24,7 @@
                 "Velor\\GraphAxis\\Providers\\GraphAxisServiceProvider"
             ],
             "vite": [
-                "dist/cms.js"
+                "dist/velor.js"
             ]
         }
     },

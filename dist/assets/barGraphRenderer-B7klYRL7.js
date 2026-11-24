@@ -1,7 +1,7 @@
 var f = Object.defineProperty;
 var p = (e, t, o) => t in e ? f(e, t, { enumerable: !0, configurable: !0, writable: !0, value: o }) : e[t] = o;
 var s = (e, t, o) => p(e, typeof t != "symbol" ? t + "" : t, o);
-import { i as y, u as m, a as g, b as h, c as v, d as b } from "./installCanvasRenderer-nrYOY0X5.js";
+import { i as y, u as g, a as m, b as v, c as h, d as b } from "./installCanvasRenderer-nrYOY0X5.js";
 import { i as x } from "./install-Y7N4lAna.js";
 /*! Third-party licenses: see THIRD_PARTY_NOTICES.md and licenses/ in the Composer package. */
 function d(e) {
@@ -27,7 +27,7 @@ function k(e) {
     formatter: e.valueMode === "percentage" ? "{value}%" : void 0
   };
 }
-m([x, g, h, v, b]);
+g([x, m, v, h, b]);
 class z {
   constructor(t) {
     s(this, "chart");
@@ -36,7 +36,7 @@ class z {
   render(t) {
     if (!d(t))
       throw new Error("The bar graph data is invalid.");
-    const o = getComputedStyle(document.documentElement), r = o.getPropertyValue("--bs-body-color").trim() || "#212529", i = o.getPropertyValue("--cms-border").trim() || "#dee2e6", c = o.getPropertyValue("--cms-surface").trim() || "#ffffff", n = k(t), a = {
+    const o = getComputedStyle(document.documentElement), r = o.getPropertyValue("--bs-body-color").trim() || "#212529", i = o.getPropertyValue("--velor-border").trim() || "#dee2e6", c = o.getPropertyValue("--velor-surface").trim() || "#ffffff", n = k(t), a = {
       type: "category",
       data: t.categories,
       axisLabel: { color: r },

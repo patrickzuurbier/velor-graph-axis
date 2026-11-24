@@ -3,9 +3,9 @@ var f = (t, r, e) => r in t ? u(t, r, { enumerable: !0, configurable: !0, writab
 var s = (t, r, e) => f(t, typeof r != "symbol" ? r + "" : r, e);
 import { i as x } from "./install-Y7N4lAna.js";
 import { i as m } from "./install-dQSk1FG6.js";
-import { i as b, u as d, a as g, b as h, c as A, d as L } from "./installCanvasRenderer-nrYOY0X5.js";
+import { i as b, u as d, a as g, b as h, c as A, d as v } from "./installCanvasRenderer-nrYOY0X5.js";
 /*! Third-party licenses: see THIRD_PARTY_NOTICES.md and licenses/ in the Composer package. */
-function v(t) {
+function L(t) {
   if (typeof t != "object" || t === null || !("categories" in t) || !("series" in t) || !("primaryAxisLabel" in t) || !("secondaryAxisLabel" in t) || t.primaryAxisLabel !== null && typeof t.primaryAxisLabel != "string" || t.secondaryAxisLabel !== null && typeof t.secondaryAxisLabel != "string")
     return !1;
   const r = t.categories;
@@ -35,16 +35,16 @@ function S(t) {
     };
   });
 }
-d([x, m, g, h, A, L]);
+d([x, m, g, h, A, v]);
 class w {
   constructor(r) {
     s(this, "chart");
     this.chart = b(r, void 0, { renderer: "canvas" });
   }
   render(r) {
-    if (!v(r))
+    if (!L(r))
       throw new Error("The mixed graph data is invalid.");
-    const e = getComputedStyle(document.documentElement), o = e.getPropertyValue("--bs-body-color").trim() || "#212529", i = e.getPropertyValue("--cms-border").trim() || "#dee2e6", c = e.getPropertyValue("--cms-surface").trim() || "#ffffff", l = k(r.series), n = (p, a) => ({
+    const e = getComputedStyle(document.documentElement), o = e.getPropertyValue("--bs-body-color").trim() || "#212529", i = e.getPropertyValue("--velor-border").trim() || "#dee2e6", c = e.getPropertyValue("--velor-surface").trim() || "#ffffff", l = k(r.series), n = (p, a) => ({
       type: "value",
       name: p ?? void 0,
       position: a,

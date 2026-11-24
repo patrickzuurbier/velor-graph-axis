@@ -36,8 +36,8 @@ class PictorialBarGraphRenderer implements GraphRenderer {
 
         const styles = getComputedStyle(document.documentElement);
         const textColor = styles.getPropertyValue('--bs-body-color').trim() || '#212529';
-        const borderColor = styles.getPropertyValue('--cms-border').trim() || '#dee2e6';
-        const surfaceColor = styles.getPropertyValue('--cms-surface').trim() || '#ffffff';
+        const borderColor = styles.getPropertyValue('--velor-border').trim() || '#dee2e6';
+        const surfaceColor = styles.getPropertyValue('--velor-surface').trim() || '#ffffff';
         const categoryAxis = {
             type: 'category' as const,
             data: data.categories,

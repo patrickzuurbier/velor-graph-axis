@@ -6,6 +6,11 @@ This project follows semantic versioning: `MAJOR.MINOR.PATCH`.
 
 ## [Unreleased]
 
+### Changed
+
+- Migrated the package entrypoint, theme integration, and developer
+  documentation to the canonical Velor APIs introduced in Velor `1.26`.
+
 ## [1.0.0] - 2026-11-11
 
 ### Added

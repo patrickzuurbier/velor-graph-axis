@@ -32,8 +32,8 @@ class ScatterGraphRenderer implements GraphRenderer {
 
         const styles = getComputedStyle(document.documentElement);
         const textColor = styles.getPropertyValue('--bs-body-color').trim() || '#212529';
-        const borderColor = styles.getPropertyValue('--cms-border').trim() || '#dee2e6';
-        const surfaceColor = styles.getPropertyValue('--cms-surface').trim() || '#ffffff';
+        const borderColor = styles.getPropertyValue('--velor-border').trim() || '#dee2e6';
+        const surfaceColor = styles.getPropertyValue('--velor-surface').trim() || '#ffffff';
         const option: ScatterGraphOption = {
             animationDuration: 350,
             color: ['#457b9d', '#e76f51', '#2a9d8f', '#e9c46a'],

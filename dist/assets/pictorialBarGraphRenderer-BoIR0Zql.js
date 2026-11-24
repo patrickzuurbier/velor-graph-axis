@@ -1,7 +1,7 @@
 var se = Object.defineProperty;
 var ce = (t, a, e) => a in t ? se(t, a, { enumerable: !0, configurable: !0, writable: !0, value: e }) : t[a] = e;
 var V = (t, a, e) => ce(t, typeof a != "symbol" ? a + "" : a, e);
-import { _ as Z, v as ue, x as ve, C as pe, ab as de, G, A as he, B as fe, z as ge, E as me, o as q, H as F, ac as ye, j as J, ad as L, ae as Se, af as xe, ag as _e, y as w, R as K, ah as N, L as Pe, ai as be, f as Re, t as Ce, i as De, u as Ae, a as we, b as ze, c as Be, d as Ie } from "./installCanvasRenderer-nrYOY0X5.js";
+import { _ as Z, v as ue, x as ve, C as pe, ab as de, G, A as he, B as fe, z as ge, E as ye, o as q, H as F, ac as me, j as J, ad as L, ae as Se, af as xe, ag as _e, y as w, R as K, ah as N, L as Pe, ai as be, f as Re, t as Ce, i as De, u as Ae, a as we, b as ze, c as Be, d as Ie } from "./installCanvasRenderer-nrYOY0X5.js";
 import { b as R, B as X, c as Le, a as Oe, r as Te } from "./BaseBarSeries-DYc5uKGI.js";
 /*! Third-party licenses: see THIRD_PARTY_NOTICES.md and licenses/ in the Composer package. */
 var Ee = ["itemStyle", "borderWidth"], H = [{
@@ -37,8 +37,8 @@ var Ee = ["itemStyle", "borderWidth"], H = [{
       };
       o.diff(d).add(function(s) {
         if (o.hasValue(s)) {
-          var c = W(o, s), g = k(o, s, c, l), m = U(o, l, g);
-          o.setItemGraphicEl(s, m), n.add(m), $(m, l, g);
+          var c = W(o, s), g = k(o, s, c, l), y = U(o, l, g);
+          o.setItemGraphicEl(s, y), n.add(y), $(y, l, g);
         }
       }).update(function(s, c) {
         var g = d.getItemGraphicEl(c);
@@ -46,8 +46,8 @@ var Ee = ["itemStyle", "borderWidth"], H = [{
           n.remove(g);
           return;
         }
-        var m = W(o, s), y = k(o, s, m, l), S = re(o, y);
-        g && S !== g.__pictorialShapeStr && (n.remove(g), o.setItemGraphicEl(s, null), g = null), g ? Ue(g, l, y) : g = U(o, l, y, !0), o.setItemGraphicEl(s, g), g.__pictorialSymbolMeta = y, n.add(g), $(g, l, y);
+        var y = W(o, s), m = k(o, s, y, l), S = re(o, m);
+        g && S !== g.__pictorialShapeStr && (n.remove(g), o.setItemGraphicEl(s, null), g = null), g ? Ue(g, l, m) : g = U(o, l, m, !0), o.setItemGraphicEl(s, g), g.__pictorialSymbolMeta = m, n.add(g), $(g, l, m);
       }).remove(function(s) {
         var c = d.getItemGraphicEl(s);
         c && j(d, s, c.__pictorialSymbolMeta.animationModel, c);
@@ -112,9 +112,9 @@ function Xe(t, a, e, i, r) {
 function He(t, a, e, i, r, n, o, d, h, f, v, p) {
   var l = v.categoryDim, u = v.valueDim, s = p.pxSign, c = Math.max(a[u.index] + d, 0), g = c;
   if (i) {
-    var m = Math.abs(h), y = xe(t.get("symbolMargin"), "15%") + "", S = !1;
-    y.lastIndexOf("!") === y.length - 1 && (S = !0, y = y.slice(0, y.length - 1));
-    var x = L(y, a[u.index]), C = Math.max(c + x * 2, 0), D = S ? 0 : x * 2, T = _e(i), _ = T ? i : Q((m + D) / C), le = m - _ * c;
+    var y = Math.abs(h), m = xe(t.get("symbolMargin"), "15%") + "", S = !1;
+    m.lastIndexOf("!") === m.length - 1 && (S = !0, m = m.slice(0, m.length - 1));
+    var x = L(m, a[u.index]), C = Math.max(c + x * 2, 0), D = S ? 0 : x * 2, T = _e(i), _ = T ? i : Q((y + D) / C), le = y - _ * c;
     x = le / 2 / (S ? _ : Math.max(_ - 1, 1)), C = c + x * 2, D = S ? 0 : x * 2, !T && i !== "fixed" && (_ = f ? Q((Math.abs(f) + D) / C) : 0), g = _ * C - D, p.repeatTimes = _, p.symbolMargin = x;
   }
   var z = s * (g / 2), b = p.pathPosition = [];
@@ -166,8 +166,8 @@ function ee(t, a, e, i) {
     }, e, i);
   }
   function s(c) {
-    var g = d.slice(), m = e.pxSign, y = c;
-    return (e.symbolRepeatDirection === "start" ? m > 0 : m < 0) && (y = f - 1 - c), g[h.index] = p * (y - f / 2 + 0.5) + d[h.index], {
+    var g = d.slice(), y = e.pxSign, m = c;
+    return (e.symbolRepeatDirection === "start" ? y > 0 : y < 0) && (m = f - 1 - c), g[h.index] = p * (m - f / 2 + 0.5) + d[h.index], {
       x: g[0],
       y: g[1],
       scaleX: e.symbolScale[0],
@@ -259,7 +259,7 @@ function j(t, a, e, i) {
   O(i, function(o) {
     n.push(o);
   }), i.__pictorialMainPath && n.push(i.__pictorialMainPath), i.__pictorialClipPath && (e = null), F(n, function(o) {
-    ye(o, {
+    me(o, {
       scaleX: 0,
       scaleY: 0
     }, e, a, function() {
@@ -293,8 +293,8 @@ function $(t, a, e) {
       }, e.style));
     } else
       c.useStyle(e.style);
-    var m = c.ensureState("emphasis");
-    m.style = o, l && (m.scaleX = c.scaleX * 1.1, m.scaleY = c.scaleY * 1.1), c.ensureState("blur").style = d, c.ensureState("select").style = h, f && (c.cursor = f), c.z2 = e.z2;
+    var y = c.ensureState("emphasis");
+    y.style = o, l && (y.scaleX = c.scaleX * 1.1, y.scaleY = c.scaleY * 1.1), c.ensureState("blur").style = d, c.ensureState("select").style = h, f && (c.cursor = f), c.z2 = e.z2;
   });
   var u = a.valueDim.posDesc[+(e.boundingLength > 0)], s = t.__pictorialBarRect;
   s.ignoreClip = !0, he(s, ge(r), {
@@ -304,7 +304,7 @@ function $(t, a, e) {
     inheritColor: e.style.fill,
     defaultOpacity: e.style.opacity,
     defaultOutsidePosition: u
-  }), me(t, v, p, n.get("disabled"));
+  }), ye(t, v, p, n.get("disabled"));
 }
 function Q(t) {
   var a = Math.round(t);
@@ -402,7 +402,7 @@ class qe {
   render(a) {
     if (!Qe(a))
       throw new Error("The pictorial bar graph data is invalid.");
-    const e = getComputedStyle(document.documentElement), i = e.getPropertyValue("--bs-body-color").trim() || "#212529", r = e.getPropertyValue("--cms-border").trim() || "#dee2e6", n = e.getPropertyValue("--cms-surface").trim() || "#ffffff", o = {
+    const e = getComputedStyle(document.documentElement), i = e.getPropertyValue("--bs-body-color").trim() || "#212529", r = e.getPropertyValue("--velor-border").trim() || "#dee2e6", n = e.getPropertyValue("--velor-surface").trim() || "#ffffff", o = {
       type: "category",
       data: a.categories,
       axisLabel: { color: i },

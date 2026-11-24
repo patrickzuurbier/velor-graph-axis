@@ -1,17 +1,17 @@
 # Velor Graph Axis
 
-Axis graph types for Velor CMS. The package provides renderer-neutral PHP
+Axis graph types for Velor. The package provides renderer-neutral PHP
 contracts and lazy Apache ECharts adapters for line, bar, pictorial bar,
 scatter, and mixed line/bar graphs with one or multiple series.
 
 ## Requirements
 
 - PHP `^8.4.1`
-- Velor CMS `^1.22`
+- Velor `^1.26`
 
 ## Installation
 
-Require the package in a compatible Velor CMS application:
+Require the package in a compatible Velor application:
 
 ```bash
 composer require patrickzuurbier/velor-graph-axis
@@ -485,5 +485,5 @@ versions, and license identifiers.
 
 ## Testing
 
-Package tests run inside a compatible Velor CMS host application with the
+Package tests run inside a compatible Velor host application with the
 package installed through the local package integration workflow.
